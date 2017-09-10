@@ -1,0 +1,33 @@
+.page-prev,
+.page-next,
+.page-link,
+.page-split {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 1px;
+    text-decoration: none;
+    margin: 0 3px;
+    line-height: 1;
+    min-width: 14px;
+    border-radius: 3px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.page-prev i,
+.page-next i {
+    font-size: 12px;
+}
+
+.page-prev.disabled,
+.page-next.disabled{
+    font-size: 12px;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.page-link.active {
+    background: #79839e;
+    color: #fff;
+    cursor: default;
+}

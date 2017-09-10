@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>地产应用-Trust Estate</title>
+  <link rel="stylesheet" href="./dist/icons/icons.css">
+  <link rel="stylesheet" href="./dist/fonts/iconfont.css">
+  <link href="./vendors/datepicker.min.css" rel="stylesheet" type="text/css">
+  <link href="./vendors/selectize.default.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./dist/css/common.css">
+</head>
+<style>
+  .faqbox{
+    position: absolute;
+    width: 376px;
+    background: #475270;
+    padding: 20px;
+    color: #fff;
+    border-radius: 8px;
+    opacity: .8;
+    z-index: 2222222;
+    top: 0;
+    left: 155px;
+    overflow: hidden;
+  }
+  .faqbox .faqbox-title{
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .faqbox .faqbox-item{
+    margin-bottom: 7px;
+  }
+  .faqbox .faqbox-item:last-child{
+    margin-bottom: 0;
+  }
+  .faqbox .faqbox-item label{
+    color: #adc3ff;
+    margin-right: 10px;
+    font-size: 12px;
+  }
+  .faqbox .faqbox-item span{
+
+    font-size: 12px;
+  }
+</style>
+<body>
+<nav class="navbar flex items-center justify-between">
+  <div class="container-fluid">
+    <a href="/" class="brand">
+      <img src="./dist/images/logo.png" class="logo" alt="Trust Estate" height="71" width="261">
+    </a>
+  </div>
+  <ul class="navLinks list-reset flex-auto m0">
+    <li class="inline-block mr1 navLinkItem">
+      <a href="/" class="navLink">
+          <i class="icon icon-home"></i>
+          <i class="icon icon-home-active active-icon"></i>
+        首页
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="exponent.html" class="navLink">
+          <i class="icon icon-exponent"></i>
+          <i class="icon icon-exponent-active active-icon"></i>
+        宏观指数
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="tradeanalyst.html" class="navLink">
+          <i class="icon icon-b-circle"></i>
+          <i class="icon icon-b-circle-active active-icon"></i>
+          商圈分析</a></li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="landestate.html" class="navLink active">
+          <i class="icon icon-estate"></i>
+          <i class="icon icon-estate-active active-icon"></i>
+          地产应用</a></li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="service.html" class="navLink">
+          <i class="icon icon-service"></i>
+          <i class="icon icon-service-active active-icon"></i>
+          定制服务</a></li>
+  </ul>
+  <div class="userInfo">
+    <span class="userEmail inline-block">bruck@sina.com.cn</span>
+    <a href="/logout" title="登出"><span class="sr-only">登出</span><i class="iconfont icon-Logout"></i></a>
+  </div>
+</nav>
+<header class="overflow-hidden">
+  <ul class="breadcrumb  overflow-hidden m0 left">
+    <li class="section">地产应用</li>
+    <li class="divider">&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+    <li class="active section">房屋短租</li>
+  </ul>
+  <ul class="breadselect right m0">
+    <li>
+      <div class="datepicker-box">
+        <i class="iconfont icon-rili"></i>
+        <input type="text" readonly
+               class="js-datepicker-months datepicker-months"
+               data-position='bottom right'
+               value="2017-05"
+               name="monthsShort"
+        />
+      </div>
+    </li>
+  </ul>
+</header>
+<main class="overflow-hidden">
+  <aside>
+    <ul>
+      <li class="active" data-type="transaction">房屋交易</li>
+      <li data-type="rent">房屋短租</li>
+      <li data-type="operation">房屋运营</li>
+      <li data-type="decoration">家装电商</li>
+      <li data-type="traffic">交通出行</li>
+      <li data-type="life">本地生活</li>
+    </ul>
+  </aside>
+  <section class="overflow-hidden p0 landmain">
+    <div class="title">2017年05月均MAU (万）</div>
+    <div class="left sele-btn-box" style="margin-left: 25px;margin-top: 25px;">
+      <select id="select-all" class="demo-default selectized all"><option value="3">全国</option></select>
+      <select id="select-province" class="demo-default selectized province"><option value="-1">全国</option></select>
+      <select id="select-city" class="demo-default selectized city"><option value="-1">全国</option></select>
+    </div>
+    <div id="main" style="width: 100%;height:400px;clear: both"></div>
+  </section>
+
+  <div class="barinfo" style="margin-top: 20px;margin-left: 261px;position: relative">
+    <section class="overflow-hidden p0 left" style="margin-right: 24px;width: 370px;">
+      <div class="section-num">
+        <div class="section-num-tit"><span>核心数据</span><i class="iconfont icon-wenhao"></i></div>
+        <div class="faqbox" style="display: none">
+          <div class="faqcontent">
+            <div class="faqbox-title">
+              指标说明：
+            </div>
+            <div class="faqbox-item">
+              <label class="faqbox-label">DAU: </label>
+              <span>Daily Active User，日活跃用户量。该指标统计一日登录或使用某app的用户数量（去除重复登录用户），此处的统计数值为当月每天日活跃用户量的平均值。</span>
+            </div>
+            <div class="faqbox-item">
+              <label class="faqbox-label">MAU: </label>
+              <span>Monthly Active User，月活跃用户量。该指标统计一月登录或使用某app的用户数量（去除重复登录用户），此处的统计数值为当月的月活跃用户量。</span>
+            </div>
+            <div class="faqbox-item">
+              <label class="faqbox-label">每日打开次数: </label>
+              <span>该指标统计用户一日打开或使用某app的平均次数，此处的统计数值为当月用户每日打开次数的月度平均值。</span>
+            </div>
+            <div class="faqbox-item">
+              <label class="faqbox-label">每日打开时长: </label>
+              <span>该指标统计用户一日使用某app的平均时长，此处的统计数值为当月用户每日打开平均时长的月度平均值。</span>
+            </div>
+            <div class="faqbox-item">
+              <label class="faqbox-label">月均用户留存: </label>
+              <span>该指标统计某app在一月内每日新增用户在第二天内重复使用的概率的月度平均值。此处的统计数值为当月月均用户留存。</span>
+            </div>
+            <div class="faqbox-item">
+              <label class="faqbox-label">月用户新增: </label>
+              <span>该指标统计某app在一月新增的用户数量。此处的统计数值为当月用户新增量。</span>
+            </div>
+          </div>
+        </div>
+        <div class="section-num-tab"></div>
+      </div>
+    </section>
+    <section class="overflow-hidden p0 line-chart">
+      <div class="line-title title">DAU 趋势图</div>
+      <div style="padding: 24px"><div id="mains" style="width: 100%;height:400px;"></div></div>
+    </section>
+  </div>
+
+</main>
+</body>
+<script>
+  var months = ["2015-01","2015-02","2015-03","2015-04","2015-05","2015-06","2015-07","2015-08","2015-09","2015-10","2015-11","2015-12","2016-01","2016-02","2016-03","2016-04","2016-05","2016-06","2016-07","2016-08","2016-09","2016-10","2016-11","2016-12","2017-01","2017-02","2017-03","2017-04","2017-05","2017-06"];
+</script>
+<script src="./vendors/jquery.min.js"></script>
+<script src="./vendors/echarts.custom.js"></script>
+<script src="./vendors/echarts-estate.js"></script>
+
+<script src="./vendors/datepicker.min.js"></script>
+<script src="./vendors/datepicker.zh.js"></script>
+<script src="./vendors/selectize.js"></script>
+
+  <script src="./dist/js/province.js"></script>
+<script src="./dist/js/citys.js"></script>
+<script src="./dist/js/const.js"></script>
+<script src="./dist/js/main.js"></script>
+<script>
+
+  $(".iconfont.icon-wenhao").mouseover(function () {
+    $(".faqbox").show();
+  });
+  $(".iconfont.icon-wenhao").mouseout(function () {
+    $(".faqbox").hide();
+  });
+  if(!!window.months) {
+    $('.js-datepicker-months').val(months[months.length - 1]);
+  }
+  //默认加载
+  const timepicker = $('.js-datepicker-months'); //时间选择器
+  const landTitle = $(".landmain .title");
+  const asideActive = $("aside ul li.active");
+  const selectPro = $("#select-province");
+  const selectCity = $("#select-city");
+  landTitle.text(timepicker.val().replace("-","年")+"月均MAU (万）");
+  //aside 切换加载
+  $("aside ul li").click(function(){
+      $("aside ul li").removeClass("active");
+      $(this).addClass("active");
+      $(".barinfo").hide();
+      $(".breadcrumb .section.active").text($(this).text());
+      myLineBar(timepicker.val(),selectPro.val(),selectCity.val(),$(this).data("type"));
+  });
+
+  //时间选择加载
+  timepicker.datepicker({
+      view: 'months',
+      minView: 'months',
+      minDate: (window.months && new Date(months[0])) || new Date('2015-01'),
+      maxDate: (window.months && new Date(months[months.length - 1])) || new Date(),
+      language: 'zh',
+      dateFormat: 'yyyy-mm',
+      autoClose: true,
+      onSelect:function(val){
+          //地产应用
+          $(".barinfo").hide();
+          landTitle.text(val.replace("-","年")+"月均MAU (万）");
+          myLineBar(val,selectPro.val(),selectCity.val(),asideActive.data("type"));
+      }
+  });
+
+  //获取省份数据
+  for(let i =0;i<provinces.length;i++){
+    selectPro.append('<option value="'+provinces[i].id+'">'+provinces[i].name+'</option>');
+  }
+  selectPro.on("change",function(){
+      let cityData = '';
+      let selectPOSed = $("#select-province option:selected");
+      const value = selectPOSed.val();
+      for(let k =0;k<citys[value].length;k++){
+        cityData+= '<option value="'+citys[value][k].id+'">'+citys[value][k].name+'</option>';
+      }
+      selectCity.html('<option></option>'+cityData);
+  });
+  selectPro.find("option[value='-1']").attr("selected",true);
+  selectCity.on("change",function () {
+    myLineBar(timepicker.val(),selectPro.val(),$(this).val(),asideActive.data("type"));
+  });
+  myLineBar(timepicker.val(),'-1','-1',asideActive.data("type"));
+
+</script>
+</html>

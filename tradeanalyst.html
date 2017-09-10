@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>商圈分析-Trust Estate</title>
+  <link rel="stylesheet" href="./dist/icons/icons.css">
+  <link rel="stylesheet" href="./src/fonts/iconfont.css">
+  <link href="./vendors/datepicker.min.css" rel="stylesheet" type="text/css">
+  <link href="./vendors/selectize.default.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./dist/css/common.css">
+  <link rel="stylesheet" href="./dist/css/business.css">
+   <script src="./dist/js/province.js"></script>
+  <style>
+    .anchorBL,
+    .anchorTR {
+      display: block
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar flex items-center justify-between">
+  <div class="container-fluid">
+    <a href="/" class="brand">
+      <img src="./dist/images/logo.png" class="logo" alt="Trust Estate" height="71" width="261">
+    </a>
+  </div>
+  <ul class="navLinks list-reset flex-auto m0">
+    <li class="inline-block mr1 navLinkItem">
+      <a href="/" class="navLink">
+        <i class="icon icon-home"></i>
+        <i class="icon icon-home-active active-icon"></i>
+        首页
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem ">
+      <a href="exponent.html" class="navLink ">
+        <i class="icon icon-exponent"></i>
+        <i class="icon icon-exponent-active active-icon"></i>
+        宏观指数
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem active">
+      <a href="tradeanalyst.html" class="navLink active">
+        <i class="icon icon-b-circle"></i>
+        <i class="icon icon-b-circle-active active-icon"></i>
+        商圈分析
+      </a></li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="landestate.html" class="navLink">
+        <i class="icon icon-estate"></i>
+        <i class="icon icon-estate-active active-icon"></i>
+        地产应用
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="service.html" class="navLink">
+        <i class="icon icon-service"></i>
+        <i class="icon icon-service-active active-icon"></i>
+        定制服务
+      </a>
+    </li>
+  </ul>
+  <div class="userInfo">
+    <span class="userEmail inline-block">bruck@sina.com.cn</span>
+    <a href="/logout" title="登出"><span class="sr-only">登出</span><i class="iconfont icon-Logout"></i></a>
+  </div>
+</nav>
+<header class="overflow-hidden">
+  <ul class="breadcrumb  overflow-hidden m0 left">
+    <li class="section">商圈分析</li>
+    <li class="divider">&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+    <li class="active section">人群迁徙图</li>
+  </ul>
+
+  <ul class="breadselect right m0">
+    <li>
+      <div class="datepicker-box">
+        <i class="iconfont icon-rili"></i>
+        <input type="text" readonly
+              class="js-datepicker-months datepicker-months"
+              data-position='bottom right'
+              value="2017-05"
+              name="monthsShort"
+        />
+      </div>
+    </li>
+  </ul>
+</header>
+
+<main class="overflow-hidden p0">
+
+  <aside style="position: absolute;z-index: 222;left: 24px;margin-top: 24px;">
+    <ul>
+      <li class="active" data-type="migration"><a href="javascript:;">人群迁徙图</a></li>
+      <li data-type="crowd"><a href="javascript:;">人群热力图</a></li>
+      <!-- <a data-type="payfor"><a href="javascript:;">线下支付</a></a> -->
+      <li data-type="persona"><a href="javascript:;">人群画像</a></li>
+    </ul>
+  </aside>
+
+  <section class="overflow-hidden p0 not-rounded" style="background: none">
+
+
+    <!--人群热力图-->
+    <div class="view-tab crowd ">
+      <div class="thermdy">
+        <ul>
+          <li class="active" data-type="1">全部人群热力图</li>
+          <li data-type="2">常驻人群热力图</li>
+          <li data-type="3">流动人口热力图</li>
+          <li data-type="4">白天人群热力图</li>
+          <li data-type="5">晚间人群热力图</li>
+          <li data-type="payfor">线下支付</li>
+          <!--//1:全部人群热力图,2:常驻人群热力图,3:流动人口热力图,4:白天人群热力图,5:晚间人群热力图-->
+        </ul>
+      </div>
+      <div class="thermdy-select">
+        <select id="crowd-select-city" class="demo-default selectized city" placeholder="城市：北京市"><option value="4">北京</option></select>
+      </div>
+      <div id="allmap" style="height:700px;"></div>
+    </div>
+
+
+
+    <!--人群迁徙图-->
+    <div class="view-tab migration active">
+      <div class="trade-chios">
+        <select id="migration-trade-province"  class="demo-default selectized province"></select>
+        <select id="migration-trade-city" class="demo-default selectized city">
+          <option value="">全部</option>
+          <option value="405">北京</option>
+        </select>
+      </div>
+      <div class="trade-select">
+        <div class="trade-select-tit">
+          <div class="trade">
+            <ul class="overflow-hidden m0 pl1">
+              <li data-type="1"><div class="titname"></div>人群流入</li>
+              <li class="active" data-type="2"><div class="titname"></div>人群流出</li>
+            </ul>
+          </div>
+        </div>
+        <ul class="ranklist"></ul>
+      </div>
+      <div id="main" style="width:100%;height:580px;padding-top: 60px;"></div>
+    </div>
+
+
+
+    <!--线下支付-->
+    <div class="view-tab payfor ">
+      <div class="thermdy-select">
+        <select id="payfor-select-city" class="demo-default selectized city"><option value="4">北京</option></select>
+      </div>
+      <div id="payforMap" style="height:700px;"></div>
+    </div>
+
+
+
+    <!--人群画像-->
+    <div class="view-tab persona ">
+      <section>
+        <div class="area-title">
+          <a href="javascript:;" class="right mr2 resetTradeSelectBtn js-resetTradeSelectBtn">
+            <i class="iconfont icon-shuaxin"></i>
+            重置
+          </a>
+          区域选择
+        </div>
+        <div class="area-map">
+          <div class="select-option" id="option"></div>
+          <div class="map-main" id="personamap"></div>
+          <div class="map-foot">
+            <button class="button js-viewPortraitBtn">查看选择区域人物画像
+              <div class="mul8 inline-block loading-icon">
+                  <div class="mul8circ1"></div>
+                  <div class="mul8circ2"></div>
+                </div></button>
+                <div class="js-personal-total personal-total" style="padding-top: 8px; "></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="page-content personal-content js-personal" id="portrait">
+        <article class="pannel">
+          <div class="pannel-header">
+            性别分布
+          </div>
+          <div class="pannel-body">
+            <div class="sexChart">
+              <div class="p-sex-nums" id="sexNums"></div>
+              <canvas id="sexChart" style="height: 220px;width: 100%;"></canvas>
+            </div>
+          </div>
+        </article>
+
+        <article class="pannel">
+          <div class="pannel-header">
+            年龄分布
+          </div>
+          <div class="pannel-body">
+            <div class="sexChart">
+              <div id="ageChart" class="p-chart"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pannel">
+          <div class="pannel-header">
+            人群分类
+          </div>
+          <div class="pannel-body">
+            <div class="p-box-content js-appChartBox">
+              <div id="manCategories" class="GCchart" style="height: 360px;"></div>
+              <div class="chartDataBox gtable">
+                <div class="newandroidModelHead manTypeHead">
+                  <table cellpadding="0" cellspacing="0">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                </div>
+                <div class="newandroidModelList scrollbar manTypeList" style="height: 312px;">
+                  <table cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!--<article class="pannel">
+          <div class="pannel-header">
+            联网情况
+          </div>
+          <div class="pannel-body">
+            <div class="p-box-content js-appChartBox">
+              <div id="netTypeChart" style="height: 360px;width: 100%;"></div>
+            </div>
+          </div>
+        </article>-->
+
+        <article class="pannel">
+          <div class="pannel-header">
+            手机品牌
+          </div>
+          <div class="pannel-body">
+            <div class="p-box-content">
+              <div class="GCchart" id="phoneBrandChart" style="height:430px;"></div>
+              <div class="chartDataBox gtable">
+                <div class="newandroidModelHead phonebrandhead">
+                  <table cellpadding="0" cellspacing="0">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                </div>
+                <div class="newandroidModelList scrollbar phonebrandlist">
+                  <table cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pannel">
+          <div class="pannel-header">
+            安卓版本
+          </div>
+          <div class="pannel-body">
+            <div class="p-box-content">
+              <div class="GCchart" id="androidVersionChart" style="height:430px;"></div>
+              <div class="chartDataBox gtable">
+                <div class="newandroidModelHead versionhead">
+                  <table cellpadding="0" cellspacing="0">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="newandroidModelList scrollbar versionlist">
+                  <table cellpadding="0" cellspacing="0">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pannel">
+          <div class="pannel-header">
+            运营商分布
+          </div>
+          <div class="pannel-body">
+            <div class="p-box-content js-appChartBox">
+              <div id="" class="pieChart">
+                <div class="p-trangleBox js-operator"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pannel">
+          <div class="pannel-header">
+            特点偏好
+          </div>
+          <div class="pannel-body">
+            <div class="p-box-content js-appChartBox">
+              <div class="interestChartBox scrollbar">
+                <div id="interestChart" style="height:250px;" class="p-interestChart"></div>
+                <div class="js-masterApp interestLikeMasterApp"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pannel">
+          <div class="pannel-header">
+            常用APP
+          </div>
+          <div class="pannel-body">
+            <div class="p-box">
+              <div class="p-box-content">
+                <div class="js-similarApps similarAppsList"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  var months = ["2015-01","2015-02","2015-03","2015-04","2015-05","2015-06","2015-07","2015-08","2015-09","2015-10","2015-11","2015-12","2016-01","2016-02","2016-03","2016-04","2016-05","2016-06","2016-07","2016-08","2016-09","2016-10","2016-11","2016-12","2017-01","2017-02","2017-03","2017-04","2017-05","2017-06"];
+</script>
+
+<script src="./vendors/jquery.min.js"></script>
+<script src="./vendors/echarts.custom.js"></script>
+<script src="./vendors/echarts-estate.js"></script>
+
+<script src="./vendors/datepicker.min.js"></script>
+<script src="./vendors/datepicker.zh.js"></script>
+<script src="./vendors/selectize.js"></script>
+<script src="./vendors/china.js"></script>
+<script src="./vendors/lodash.custom.min.js"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IPUjjoC8Vi2wGPMDd4Gif3r5j17lGqjb"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+<!--加载鼠标绘制工具-->
+<script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+<!--加载检索信息窗口-->
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+
+<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>-->
+
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.4/src/CityList_min.js"></script>
+
+
+<script src="./dist/js/citys.js"></script>
+<script src="./dist/js/const.js"></script>
+<script src="./dist/js/main.js"></script>
+<script src="./dist/js/portrait.js"></script>
+<script>
+
+  $(function() {
+    //首次默认显示迁徙图
+    var hash = location.hash;
+    if(hash && hash === '#crowd') {
+      $('aside ul li[data-type="crowd"]').trigger('click');
+    } else if(hash && hash === '#payfor') {
+      $('aside ul li[data-type="payfor"]').trigger('click');
+    } else if(hash && hash === '#persona') {
+      $('aside ul li[data-type="persona"]').trigger('click');
+    } else {
+      drawmaps(timepickermonth.val(),'406',migrationTrade.data("type"),"北京");
+    }
+  })
+
+  const timepickermonth = $('.js-datepicker-months'); //时间选择器
+  const AsideActive = $('aside ul li.active'); //侧边栏tab active状态
+
+
+  $('.js-datepicker-months').val(months[months.length - 1]);
+
+  //日期选择
+  timepickermonth.datepicker({
+    view: 'months',
+    minView: 'months',
+    minDate: (window.months && new Date(months[0])) || new Date('2015-01'),
+    maxDate: (window.months && new Date(months[months.length - 1])) || new Date(),
+    language: 'zh',
+    dateFormat: 'yyyy-mm',
+    autoClose: true,
+    onSelect:function(value){
+
+//      判断是那个aside li
+      const Litype = $('aside ul li.active').data("type");
+
+      if(Litype == "crowd"){
+          //人群热力图
+
+        var type = $(".thermdy ul li.active").data("type");
+        myChartThermodynamic(value,citybtnvalue,type,selectCity.text(), map2);
+
+      }else if(Litype =="migration"){
+          //人群迁徙图
+
+        var type = $(".trade ul li.active").data("type");
+        var cityId = migrationSelectCity.val();
+        if(cityId) {
+          drawmaps(value,migrationSelectCity.val(),type,$("#migration-trade-city option:selected").text(), true);
+        } else {
+          var tradpro =  $("#migration-trade-province option:selected");
+          drawmaps(value,tradpro.val(),type,tradpro.text());
+        }
+
+
+
+      }else if(Litype =="payfor"){
+          //线下支付
+
+        myChartpayfor(value,payforSelectval,payforSelectCity.text(), map4);
+
+      }else if(Litype =="persona"){
+          //人群画像
+
+      }
+    }
+  });
+
+
+  var map2 = new BMap.Map("allmap");
+var point = new BMap.Point(116.418261, 39.921984);
+    map2.centerAndZoom(point, 11);
+    // 初始化地图，设置中心点坐标和地图级别
+    map2.enableScrollWheelZoom();
+var map2LastZoom = 11;
+function zoomendCallback(type, target) {
+  var zoom = this.getZoom();
+
+  if(zoom >=15 && map2LastZoom < 15) {
+    var bs = this.getBounds();   //获取可视区域
+    var bssw = bs.getSouthWest();   //可视区域左下角
+    var bsne = bs.getNorthEast();   //可视区域右上角
+    myChartThermodynamic(timepickermonth.val(),selectCity.val(),
+      $('.thermdy ul li.active').data("type"),'', this, bssw, bsne);
+  } else if(map2LastZoom >= 15 && zoom < 15) {
+    myChartThermodynamic(timepickermonth.val(),selectCity.val(),
+      $('.thermdy ul li.active').data("type"),'', this);
+  }
+  map2LastZoom = zoom;
+}
+map2.addEventListener('zoomend', _.debounce(zoomendCallback));
+    // map.removeEventListener('zoomend', zoomendCallback);
+
+
+  //-----人群热力图
+    //首次默认
+    let selectCity = $('#crowd-select-city'); //城市选择器
+    let citydata = '';  //城市数组
+    let citybtnvalue = ''; //选择的城市值
+    let thermdyTab =$('.thermdy ul li'); // 人群热力图顶部tab
+    let thermdyTabActive =$('.thermdy ul li.active'); // 人群热力图顶部tab active状态
+    //城市选择
+    for(let i in citys){
+      for(let k =0;k<citys[i].length;k++){
+        citydata+= '<option value="'+citys[i][k].id+'"'+
+        (citys[i][k].id == 406 ? ' selected ' : '')
+        +'>'+citys[i][k].name+'</option>';
+      }
+    }
+    selectCity.html(citydata);
+    selectCity.selectize({
+      sortField: 'text', // text:依据文本排序
+      dropdownParent:'body',
+      onChange:function (valu) {
+        citybtnvalue = valu;
+//        selectCity[0].selectize.clear(); //select.js 清空
+        if (selectCity.hasClass('inited')) {
+          myChartThermodynamic(timepickermonth.val(),citybtnvalue,
+          $('.thermdy ul li.active').data("type"),selectCity.text(),map2);
+        } else {
+          selectCity.addClass('inited');
+        }
+
+      }
+    });
+    selectCity[0].selectize.setValue(405);
+    // console.log( selectCity[0].selectize.refreshItems)
+    //  selectCity[0].selectize.updateOption();
+    //首次加载
+//    myChartThermodynamic(timepickermonth.val(),405,1,"北京");
+    //人群热力图 tab 切换
+    thermdyTab.click(function(){
+      thermdyTab.removeClass("active");
+      $(this).addClass("active");
+      var type = $(this).data("type");
+      myChartThermodynamic(timepickermonth.val(),citybtnvalue, type, selectCity.text(), map2);
+    });
+
+
+
+  //-----人群迁徙图
+    let migrationSelectPro = $("#migration-trade-province");  //迁徙图省份
+    let migrationSelectCity = $('#migration-trade-city');
+    let migrationTrade = $('.trade ul li.active');//迁徙图tab切换
+    let migrationProVal = '';
+    for(let i =0;i<provinces.length;i++){
+      migrationSelectPro.append('<option value="'+provinces[i].id+'">'+provinces[i].name+'</option>');
+    }
+    migrationSelectPro.on("change",function () {
+      var tradpro =  $("#migration-trade-province option:selected");
+      var val = tradpro.val();
+      var SelectCity = '';
+      for(let k =0;k<citys[val].length;k++){
+        SelectCity+= '<option value="'+citys[val][k].id+'">'+citys[val][k].name+'</option>';
+      }
+      migrationSelectCity.html('<option value="">全部</option>'+SelectCity);
+      drawmaps(timepickermonth.val(),$(this).val(),$('.trade ul li.active').data("type"),tradpro.text());
+    });
+    migrationSelectPro.find("option[value='406']").attr("selected",true);
+    migrationSelectCity.on("change",function () {
+      var cityId = $(this).val();
+      if(cityId) {
+        drawmaps(timepickermonth.val(),migrationSelectCity.val(),$('.trade ul li.active').data("type"),$("#migration-trade-city option:selected").text(), true);
+      } else {
+        var tradpro = $("#migration-trade-province option:selected");
+        drawmaps(timepickermonth.val(),tradpro.val(),$('.trade ul li.active').data("type"),tradpro.text());
+      }
+
+    });
+    //人群迁徙图 tab切换
+    $('.trade ul li').on("click",function(){
+      $('.trade ul li').removeClass("active");
+      $(this).addClass("active");
+      // drawmaps(timepickermonth.val(),migrationSelectCity.val(),$(this).data("type"),$("#migration-trade-city option:selected").text());
+      var cityId = migrationSelectCity.val();
+      if(cityId) {
+        drawmaps(timepickermonth.val(),migrationSelectCity.val(),$(this).data("type"),$("#migration-trade-city option:selected").text(), true);
+      } else {
+        var tradpro = $("#migration-trade-province option:selected");
+        drawmaps(timepickermonth.val(),tradpro.val(),$(this).data("type"),tradpro.text());
+      }
+    });
+
+
+// var map4 = new BMap.Map("payforMap");          // 创建地图实例
+//     // console.log(data);
+//     var point4 = new BMap.Point(116.418261, 39.921984);
+//     map4.centerAndZoom(point4, 11);             // 初始化地图，设置中心点坐标和地图级别
+//     map4.enableScrollWheelZoom(); // 允许滚轮缩放
+//   var map4LastZoom = 11;
+//   function zoomendCallback4(type, target) {
+//     var zoom = this.getZoom();
+//     if(zoom >=15 && map4LastZoom < 15) {
+//       var bs = this.getBounds();   //获取可视区域
+//       var bssw = bs.getSouthWest();   //可视区域左下角
+//       var bsne = bs.getNorthEast();   //可视区域右上角
+//       myChartpayfor(timepickermonth.val(),payforSelectCity.val(),'', this,bssw, bsne);
+//     } else if(map4LastZoom >= 15 && zoom < 15) {
+//       myChartpayfor(timepickermonth.val(),payforSelectCity.val(),'', this);
+//     }
+//     map4LastZoom = zoom;
+//   }
+//   map4.addEventListener('zoomend',  _.debounce(zoomendCallback4));
+//   //-----线下支付
+//     //人群热力图
+//     let payforSelectCity = $('#payfor-select-city');
+//     let payforSelectval = '';
+//     //    获取城市数据
+//     let payForCityData = '';
+//     for(let i in citys){
+//       for(let k =0;k<citys[i].length;k++){
+//         payForCityData+= '<option value="'+citys[i][k].id+'">'+citys[i][k].name+'</option>';
+//       }
+//     }
+//     payforSelectCity.html(payForCityData);
+//     payforSelectCity.selectize({
+//       sortField: 'text',
+//       onChange:function (value) {
+//         payforSelectval = value;
+//         if(payforSelectCity.hasClass('inited')) {
+//           myChartpayfor(timepickermonth.val(),payforSelectval,payforSelectCity.text(),map4);
+//         } else {
+//           payforSelectCity.addClass('inited');
+//         }
+//       }
+//     });
+//     payforSelectCity[0].selectize.setValue(405);
+//    myChartpayfor(timepickermonth.val(),payforSelectval,payforSelectCity.text());
+
+
+//aside 切换
+  $('aside ul li').on("click",function () {
+    $('aside ul li').removeClass("active");
+    $('.view-tab').removeClass("active");
+    $(".breadcrumb .section.active").text($(this).text());
+    $(this).addClass("active");
+    $('.'+$(this).data("type")).addClass("active");
+
+    location.hash = $(this).data("type");
+    switch ($(this).data("type")) {
+      case 'crowd':
+
+        var map1 = myChartThermodynamic(
+          timepickermonth.val(),selectCity.val(),$('.thermdy ul li.active').data("type"),selectCity.text(),
+          map2
+        );
+        // if(!map2) {
+        //   map2 = map1;
+        //   map2.addEventListener('zoomend', _.debounce(zoomendCallback));
+        // }
+
+        break;
+      // case 'payfor':
+      //   var map3 = myChartpayfor(timepickermonth.val(),payforSelectCity.val(),payforSelectCity.text(),
+      //   map4);
+      //   break;
+      case 'migration':
+        var cityId = migrationSelectCity.val();
+        if(cityId) {
+          drawmaps(timepickermonth.val(),migrationSelectCity.val(),$('.trade ul li.active').data("type"),$("#migration-trade-city option:selected").text(), true);
+        } else {
+          var tradpro = $("#migration-trade-province option:selected");
+          drawmaps(timepickermonth.val(),tradpro.val(),$('.trade ul li.active').data("type"),tradpro.text());
+        }
+        break;
+      default:
+        break;
+    }
+    // echarts.getInstanceByDom($('#main')[0]).resize();
+  });
+
+
+
+
+  //-----人群画像
+      var tradeOverlay = [];
+      // 百度地图API功能
+      var map = new BMap.Map('personamap', {
+        enableMapClick: false
+      });
+      var poi = new BMap.Point(116.307852, 40.057031);
+      map.centerAndZoom(poi, 16);
+      map.enableScrollWheelZoom();
+      var overlays = [];
+      var removeMarker = function(e, ee, marker){
+        map.removeOverlay(marker);
+      }
+      var editMarker = function(e, ee, marker){
+        marker.enableEditing();
+      }
+      var canCelEditMarker = function(e, ee, marker){
+        marker.disableEditing();
+      }
+      var overlaycomplete = function (e) {
+        var shapeType = drawingManager.getDrawingMode();
+
+        //创建右键菜单
+        var markerMenu = new BMap.ContextMenu();
+        markerMenu.addItem(new BMap.MenuItem('删除',removeMarker.bind(e.overlay)));
+        markerMenu.addItem(new BMap.MenuItem('编辑',editMarker.bind(e.overlay)));
+        markerMenu.addItem(new BMap.MenuItem('结束编辑',canCelEditMarker.bind(e.overlay)));
+        e.overlay.addContextMenu(markerMenu);
+        switch (shapeType) {
+          case 'circle':
+            overlays.push({
+              type: 3,
+              distance: e.overlay.getRadius(),
+              point: e.overlay.getCenter()
+            });
+            break;
+          case 'rectangle': // 矩形
+            overlays.push({
+              type: 2,
+              top_left: e.overlay.getPath()[0],
+              bottom_right: e.overlay.getPath()[2]
+            });
+            break;
+          case 'polygon': // 多边形
+            overlays.push({
+              type: 4,
+              points: e.overlay.getPath()
+            });
+            break;
+        }
+        cityOverlay.hide();
+        $("#option select:eq(3)").val('');
+        drawingManager.close();
+        // overlays.push(e.overlay);
+      };
+      var styleOptions = {
+        strokeColor: "#3c82e3", //边线颜色。
+        fillColor: "#d0dced", //填充颜色。当参数为空时，圆形将没有填充效果。
+        strokeWeight: 2, //边线的宽度，以像素为单位。
+        strokeOpacity: 0.8, //边线透明度，取值范围0 - 1。
+        fillOpacity: 0.6, //填充的透明度，取值范围0 - 1。
+        strokeStyle: 'solid' //边线的样式，solid或dashed。
+      };
+      //实例化鼠标绘制工具
+      var drawingManager = new BMapLib.DrawingManager(map, {
+        isOpen: true, //是否开启绘制模式
+        enableDrawingTool: true, //是否显示工具栏
+        drawingToolOptions: {
+          anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+          offset: new BMap.Size(5, 5), //偏离值
+        },
+        circleOptions: styleOptions, //圆的样式
+        polylineOptions: styleOptions, //线的样式
+        polygonOptions: styleOptions, //多边形的样式
+        rectangleOptions: styleOptions //矩形的样式
+      });
+      var cityList = new BMapLib.CityList({
+        container: 'option',
+        map: map
+      });
+      // 初始化cityList之后，就会有一个覆盖物。更改商圈时，覆盖物的属性会改变。
+      // 这里锁定该覆盖物，不让 map.clearOverlays() 清除该覆盖物
+      var cityOverlay = map.getOverlays()[0];
+      cityOverlay.disableMassClear();
+
+      //添加鼠标绘制工具监听事件，用于获取绘制结果
+      drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+      function clearAll() {
+        for (var i = 0; i < overlays.length; i++) {
+          map.removeOverlay(overlays[i]);
+        }
+        overlays.length = 0;
+      }
+
+      $("#option select:eq(3)").change(function (e) {
+//        console.log(1);
+        var business = $(e.currentTarget).find(':selected').text();
+        // console.log(json);
+        if($(this).val() !== '') {
+          cityList.getBusiness(business, function (json) {
+            // tradingArea = {type: 1, points: json[0].coordinate, json: json[0], trade: business};
+            tradeOverlay = [{
+              type: 4,
+              points: json[0].coordinate
+            }];
+            overlays = [];
+            map.clearOverlays();
+          });
+        } else {
+          tradeOverlay = [];
+          cityOverlay.hide();
+        }
+      });
+
+      $('.js-resetTradeSelectBtn').on('click', function() {
+        map.clearOverlays();
+        cityOverlay.hide();
+        // var $selectEl = $('#option').find('select');
+        // $selectEl.first().val('');
+        // $selectEl.not(':eq(0)').html('');
+        tradeOverlay = [];
+        overlays = [];
+        $('.js-personal').hide();
+        $('.js-personal-total').hide().text('');
+      });
+
+      $(".js-viewPortraitBtn").click(function () {
+        var $viewPortraitBtn = $(this);
+        if ((overlays && overlays.length) || (tradeOverlay && tradeOverlay.length)) {
+          var toPostOverlays = [];
+          if(overlays.length) {
+            toPostOverlays = overlays;
+          } else {
+            toPostOverlays = tradeOverlay;
+          }
+          var $option = $('#option');
+          var provinceText = $option.find('select:eq(0)').find(':selected').text();
+          var province =provinces.filter(function(item) {
+            return item.name === provinceText;
+          })[0];
+          var cityText = $option.find('select:eq(1)').find(':selected').text();
+          var city = {};
+          if(province && province.id) {
+            city = citys[province.id].filter(function(item) {
+              return item.name === cityText;
+            })[0];
+          }
+
+          if(province && province.id && city.id) {
+            $viewPortraitBtn.attr('disabled','disabled')
+            $viewPortraitBtn.find('.loading-icon').addClass('active');
+            $.ajax({
+              type: 'post',
+              url: fixurl + 'TradeArea/personaInfo',
+              data: {
+                data: window.JSON.stringify({
+                  month: $('.js-datepicker-months').val(),
+                  location_list: toPostOverlays,
+                  province_id: province.id,
+                  city_id: city.id,
+                })
+              },
+              success: function(data) {
+                $viewPortraitBtn.removeAttr('disabled')
+                $viewPortraitBtn.find('.loading-icon').removeClass('active');
+
+                if(data && data.code == 0) {
+                  $('.js-personal-total').text('商圈人群：' + data.location.total + '人').show();
+                  $('.js-personal').show();
+                  setTimeout(function() {
+                    globalData = data;
+                    renderPortrait(data);
+                     setTimeout(function() {
+                       var offsetTop = $('.js-personal')[0].offsetTop
+                       window.scrollTo(0, offsetTop);
+                     },30)
+                    // window.location.hash = '#portrait';
+                  }, 10)
+                }
+              },
+              error: function(err) {
+                $viewPortraitBtn.removeAttr('disabled')
+                $viewPortraitBtn.find('.loading-icon').removeClass('active')
+              }
+            });
+          } else {
+            alert('请选择省份和城市');
+          }
+        } else {
+          alert('请选择需要查看的区域');
+          return false;
+        }
+      });
+
+
+</script>
+</body>
+
+</html>

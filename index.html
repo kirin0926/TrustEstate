@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Trust Estate</title>
+  <link rel="stylesheet" href="./dist/icons/icons.css">
+  <link rel="stylesheet" href="./dist/fonts/iconfont.css">
+  <link rel="stylesheet" href="./dist/css/common.css">
+</head>
+
+<body class="index-page">
+
+  <nav class="navbar flex items-center justify-between">
+    <div class="container-fluid">
+      <a href="/" class="brand">
+        <img src="../dist/images/logo.png" class="logo" alt="Trust Estate" height="71" width="261">
+      </a>
+    </div>
+    <ul class="navLinks list-reset flex-auto m0">
+      <li class="inline-block mr1 navLinkItem active">
+        <a href="/Index/index" class="navLink active">
+          <i class="icon icon-home"></i>
+          <i class="icon icon-home-active active-icon"></i>
+          首页
+        </a>
+      </li>
+      <li class="inline-block mr1 navLinkItem ">
+        <a href="exponent.html" class="navLink ">
+          <i class="icon icon-exponent"></i>
+          <i class="icon icon-exponent-active active-icon"></i>
+          宏观指数
+        </a>
+      </li>
+      <li class="inline-block mr1 navLinkItem ">
+        <a href="tradeanalyst.html" class="navLink ">
+          <i class="icon icon-b-circle"></i>
+          <i class="icon icon-b-circle-active active-icon"></i>
+        商圈分析
+        </a>
+      </li>
+      <li class="inline-block mr1 navLinkItem">
+        <a href="landestate.html" class="navLink">
+          <i class="icon icon-estate"></i>
+          <i class="icon icon-estate-active active-icon"></i>
+        地产应用
+        </a>
+      </li>
+      <li class="inline-block mr1 navLinkItem">
+        <a href="service.html" class="navLink">
+          <i class="icon icon-service"></i>
+          <i class="icon icon-service-active active-icon"></i>
+          定制服务
+        </a>
+      </li>
+    </ul>
+    <div class="userInfo">
+      <a class="userEmail inline-block" href="/">bruck@sina.com.cn</a>
+      <a href="/logout" title="登出"><span class="sr-only">登出</span><i class="iconfont icon-Logout"></i></a>
+    </div>
+  </nav>
+  <div class="page-container">
+
+    <div class="page-main">
+      <div class="newsletterbox">
+        <div class="newsletter-tit">地产简讯</div>
+        <div class="lines"></div>
+        <ul class="newsletter"></ul>
+        <div class="right newsletter-slide ">
+          <ul class="js-pageContainer pageContainer"></ul>
+        </div>
+      </div>
+      <div class="ranking ">
+        <!--<div class="ranking-tit" style="padding: 12px;">房产正面舆情词热度</div>-->
+        <div class="rankingTabMenus js-rankingTabMenus">
+          <a class="js-rankingTab rankingTab active" href="#frontRank">地产正面舆情词热度</a>
+          <a class="js-rankingTab rankingTab" href="#negativeRank">地产负面舆情词热度</a>
+        </div>
+        <div class="rankingTableBox active js-niceScroll" id="frontRank">
+          <table class="rankingTable">
+            <tbody class="frontlist"></tbody>
+          </table>
+        </div>
+        <div class="rankingTableBox js-niceScroll" id="negativeRank">
+          <table class="rankingTable">
+            <tbody class="negativelist"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!--轮播图-->
+    <div class="swiper-list" style="position: relative;clear: both;">
+      <div class="slider js_slider ease">
+        <div class="frame js_frame">
+          <ul class="slides js_slides"></ul>
+        </div>
+        <span class="js_prev prev"><img src="./src/images/slide-left.png" alt=""></span>
+        <span class="js_next next"><img src="./src/images/slide-right.png" alt=""></span>
+      </div>
+    </div>
+  </div>
+  <!--
+  <script>var ranking = <?php echo json_encode($ranking); ?>;</script>
+  <script>var news_total_cnt = <?php echo json_encode($news_total_cnt); ?>;</script>
+  <script>var report_total_cnt = <?php echo json_encode($report_total_cnt); ?>;</script>
+-->
+
+  <script src="./vendors/jquery.min.js"></script>
+  <script src="./vendors/echarts.custom.js"></script>
+  <script src="./vendors/echarts-estate.js"></script>
+
+  <script src="./vendors/lory.min.js"></script>
+  <script src="./vendors/jquery.nicescroll.min.js"></script>
+
+  <script src="./dist/js/const.js"></script>
+  <script src="./dist/js/main.js"></script>
+  <script>
+    var news_total_cnt = window.news_total_cnt;
+    $('.js-rankingTabMenus').on('click', '.js-rankingTab', function (e) {
+      e.preventDefault();
+      var targetId = $(this).attr('href');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(targetId).addClass('active').siblings().removeClass('active');
+    });
+
+    $('.js-niceScroll').niceScroll({
+      cursorcolor: 'rgba(0,0,0,0.8)',
+      autohidemode: 'none',
+      cursorborder: 'none'
+    });
+
+    function initSide(data) {
+      let neglist = "";
+      let frontlist = "";
+      ////          排行榜
+      for (let i = 0; i < data.positive.length; i++) {
+        const numb = i + 1;
+        frontlist += `<tr>
+                <td><span>` + Number(numb) + `. ` + data.positive[i][0] +
+          ` </span></td>
+                <td><div class="progress-bar"><span style="width: ` + data.positive[i][1].toFixed(
+            2) * 100 + `%"></span></div></td>
+                <td class="right-align"><span>` + echarts.format.addCommas(
+            data.positive[i][2]) + `</span></td>
+              </tr>`
+      }
+      $(".frontlist").html(frontlist);
+      for (let i = 0; i < data.negative.length; i++) {
+        const numb = i + 1;
+        neglist += `<tr>
+                <td><span>` + Number(numb) + `. ` + data.negative[i][0] +
+          ` </span></td>
+                <td><div class="progress-bar"><span style="width: ` + data.negative[i][1] *
+          100 + `%"></span></div></td>
+                <td class="right-align"><span>` + echarts.format.addCommas(data.negative[
+            i][2]) + `</span></td>
+              </tr>`
+      }
+      $(".negativelist").html(neglist);
+    }
+
+    // var ranking = {"positive":[["\u4e07\u79d1",0.308,"558"],["\u4e07\u8fbe",0.145,"262"],["\u78a7\u6842\u56ed",0.143,"258"],["\u7eff\u5730",0.093,"169"],["\u6052\u5927",0.073,"132"],["\u7eff\u57ce",0.064,"115"],["\u9f99\u6e56",0.06,"109"],["\u878d\u521b",0.057,"103"],["\u4fdd\u5229",0.048,"87"],["\u534e\u590f\u5e78\u798f",0.009,"16"]],"negative":[["\u4e07\u8fbe",0.346,"56"],["\u878d\u521b",0.333,"54"],["\u4e07\u79d1",0.08,"13"],["\u9f99\u6e56",0.08,"13"],["\u7eff\u5730",0.062,"10"],["\u7eff\u57ce",0.025,"4"],["\u6052\u5927",0.025,"4"],["\u78a7\u6842\u56ed",0.019,"3"],["\u4fdd\u5229",0.019,"3"],["\u8fdc\u6d0b",0.012,"2"]]} ;
+    if (!!window.ranking) {
+      initSide(ranking);
+    }
+
+    function initNews(page) {
+      $.ajax({
+        type: "post",
+        // async: false,
+        url: fixurl + "Index/overview",
+        dataType: "json",
+        data: {
+          data: window.JSON.stringify({
+            "news": {
+              'offset': (page - 1) * 4,
+              'rows': 4
+            }
+          })
+        },
+        success: function (json) {
+          // data=json;
+          var newlist = json.news.map(function (item) {
+            return '<li><a href="' + item.resource +
+              '" target="_Blank"><img src="' + imgurl + item.icon +
+              '" alt="">\
+            <div class="overflow-hidden">\
+              <div class="newsletter-name">\
+                <span class="newsSource right"><span>' +
+              item.author + '</span>\
+                  <span class="newsTime">' + item.time.substr(0, 10) +
+              '</span></span>' + item.title + '</div>\
+              <div class="newsletter-cont">' + item.brief +
+              '</div>\
+            </div>\
+          </a></li>'
+          }).join('');
+          // 分页
+          initPaging($('.js-pageContainer')[0], Math.ceil((news_total_cnt || json.news.length) / 4), page);
+
+          $(".newsletter").html(newlist);
+        },
+        error: function () {
+          alert("接口请求失败")
+        }
+      });
+    }
+
+    $(function () {
+      let data;
+      $.ajax({
+        type: "post",
+        // async: false,
+        url: fixurl + "Index/overview",
+        dataType: "json",
+        data: {
+          data: window.JSON.stringify({
+            "news": {
+              'offset': 0,
+              'rows': 4
+            },
+            "report": {
+              'offset': 0,
+              'rows': 100
+            }
+          })
+        },
+        success: function (json) {
+          data = json;
+          let newlist = "";
+          // 分页
+          initPaging($('.js-pageContainer')[0], Math.ceil((news_total_cnt || json.news.length) / 4), 1);
+
+          //          简讯
+          for (let i = 0; i < 4; i++) {
+
+            newlist += `<li><a href="` + json.news[i].resource + `" target="_Blank">
+            <img src="` +
+              imgurl + json.news[i].icon +
+              `" alt="">
+            <div class="overflow-hidden">
+              <div class="newsletter-name">
+                <span class="newsSource right">
+                  <span>` +
+              json.news[i].author + `</span>
+                  <span class="newsTime">` + json.news[i].time.substr(
+                0, 10) + `</span>
+                </span>
+                ` + json.news[i].title +
+              `
+              </div>
+              <div class="newsletter-cont">` + json.news[i].brief +
+              `</div>
+            </div>
+          </a></li>`
+          }
+          $(".newsletter").html(newlist);
+
+          let reportList = '';
+          for (let i = 0; i < data.report.length; i++) {
+            reportList +=
+              `<li class="js_slide">
+                  <div class="slider-li">
+                    <div class="title">` +
+              data.report[i].title +
+              `</div>
+                    <div class="slider-li-main">
+                      <div class="img"><img src="` +
+              imgurl + data.report[i].icon +
+              `" alt=""></div>
+                      <div class="overflow-hidden">
+                        <h3>报告摘要：</h3>
+                        <div class="s-m-cont">` +
+              data.report[i].brief + `</div>
+                        <div class="s-m-time">` + data.report[i]
+              .time.substr(0, 10) + `</div>
+                        <div class="s-m-db"><a href="` + imgurl +
+              data.report[i].resource +
+              `" target="_Blank" class="downloadBtn">下载</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>`;
+          }
+          $('.js_slides.slides').html(reportList);
+          var ease = document.querySelector('.js_slider');
+          // http://easings.net/
+          lory(ease, {
+            slidesToScroll: 3,
+            slideSpeed: 750,
+            ease: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+          });
+        },
+        error: function () {
+          alert("接口请求失败")
+        }
+      });
+
+
+      $('.js-pageContainer').on('click', '[data-page]', function () {
+        if (!$(this).hasClass('disabled') && !$(this).hasClass('active')) {
+          var page = $(this).attr('data-page');
+          initNews(page);
+        }
+      });
+    }); // end of $.ready
+
+  </script>
+</body>
+
+</html>

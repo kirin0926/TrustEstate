@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>宏观指数-Trust Estate</title>
+  <link rel="stylesheet" href="./dist/icons/icons.css">
+  <link rel="stylesheet" href="./dist/fonts/iconfont.css">
+  <link href="./vendors/datepicker.min.css" rel="stylesheet" type="text/css">
+  <link href="./vendors/selectize.default.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./dist/css/common.css">
+</head>
+<body>
+  <nav class="navbar flex items-center justify-between">
+    <div class="container-fluid">
+      <a href="/" class="brand">
+        <img src="./dist/images/logo.png" class="logo" alt="Trust Estate" height="71" width="261">
+      </a>
+    </div>
+    <ul class="navLinks list-reset flex-auto m0">
+      <li class="inline-block mr1 navLinkItem">
+        <a href="/" class="navLink">
+            <i class="icon icon-home"></i>
+            <i class="icon icon-home-active active-icon"></i>
+          首页
+        </a>
+      </li>
+      <li class="inline-block mr1 navLinkItem active">
+        <a href="exponent.html" class="navLink active">
+            <i class="icon icon-exponent"></i>
+            <i class="icon icon-exponent-active active-icon"></i>
+          宏观指数
+        </a>
+      </li>
+      <li class="inline-block mr1 navLinkItem">
+        <a href="tradeanalyst.html" class="navLink">
+            <i class="icon icon-b-circle"></i>
+            <i class="icon icon-b-circle-active active-icon"></i>
+            商圈分析</a></li>
+      <li class="inline-block mr1 navLinkItem">
+        <a href="landestate.html" class="navLink">
+            <i class="icon icon-estate"></i>
+            <i class="icon icon-estate-active active-icon"></i>
+            地产应用</a></li>
+      <li class="inline-block mr1 navLinkItem">
+        <a href="service.html" class="navLink">
+            <i class="icon icon-service"></i>
+            <i class="icon icon-service-active active-icon"></i>
+            定制服务</a></li>
+    </ul>
+    <div class="userInfo">
+      <span class="userEmail inline-block">bruck@sina.com.cn</span>
+      <a href="/logout" title="登出"><span class="sr-only">登出</span><i class="iconfont icon-Logout"></i></a>
+    </div>
+  </nav>
+  <header class="overflow-hidden">
+    <ul class="breadcrumb  overflow-hidden m0 left">
+      <li class="section">宏观指数</li>
+      <li class="divider">&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+      <li class="active section">社会消费品零售指数</li>
+    </ul>
+
+    <ul class="breadselect right m0">
+      <li>
+        <div class="datepicker-box">
+          <i class="iconfont icon-rili"></i>
+          <!--<input type="text" class="datepicker-here selectized year"-->
+          <!--data-range="true" value="2017-06-01 ~ 2017-06-25" data-language='zh'-->
+          <!--data-position="bottom left" data-multiple-dates="2" data-multiple-dates-separator=" ~ "-->
+          <!--/>-->
+          <input type="text"
+                 class="js-datepicker-months datepicker-months"
+                 data-position='bottom right'
+                 value="2015-01 ~ 2017-05"
+                 name="monthsShort"
+                 style="width: 180px;"
+          />
+        </div>
+      </li>
+      <!-- <li class="select-li">近半年<input type="text" class="datepicker" value="2017-06-25"></li> -->
+    </ul>
+  </header>
+
+  <main class="overflow-hidden">
+    <aside>
+      <ul class="js-sideList">
+        <!-- <li class="active" data-type="1">国内经济增长指数</li>
+        <li data-type="2">社会消费品零售指数</li>
+        <li data-type="3">固定资产投资指数</li>
+        <li data-type="4">中小企业发展指数</li>
+        <li data-type="5">居民消费指数</li>
+        <li data-type="6">居民储值指数</li>
+        <li data-type="7">失业指数</li>
+        <li data-type="8">生育指数</li>
+        <li data-type="9">婚恋指数</li>
+        <li data-type="10">房产关注指数</li> -->
+      </ul>
+    </aside>
+    <section class="overflow-hidden">
+      <div class="right sele-btn-box" style="position:relative;z-index:10;">
+        <select id="select-all" class="demo-default selectized all"><option value="3">全国</option></select>
+        <select id="select-province" class="demo-default selectized province"></select>
+        <select id="select-city" class="demo-default selectized city"><option value="406">北京市</option></select>
+      </div>
+      <div id="main" style="width: 100%;height:400px;"></div>
+    </section>
+  </main>
+<script>
+  var months = ["2015-01","2015-02","2015-03","2015-04","2015-05","2015-06","2015-07","2015-08","2015-09","2015-10","2015-11","2015-12","2016-01","2016-02","2016-03","2016-04","2016-05","2016-06","2016-07","2016-08","2016-09","2016-10","2016-11","2016-12","2017-01","2017-02","2017-03","2017-04","2017-05","2017-06"];
+  var exponents = [{"id":"1","name":"\u793e\u4f1a\u6d88\u8d39\u54c1\u96f6\u552e\u6307\u6570"},{"id":"2","name":"\u623f\u4ea7\u5173\u6ce8\u6307\u6570"},{"id":"4","name":"\u901a\u8d27\u81a8\u80c0\u6307\u6570"},{"id":"5","name":"\u65c5\u6e38\u5ba2\u8fd0\u6307\u6570"},{"id":"6","name":"\u6559\u80b2\u7ecf\u6d4e\u6307\u6570"},{"id":"7","name":"\u5065\u5eb7\u7ecf\u6d4e\u6307\u6570"},{"id":"8","name":"\u5171\u4eab\u7ecf\u6d4e\u6307\u6570"}];
+</script>
+  <script src="./vendors/jquery.min.js"></script>
+  <script src="./vendors/echarts.custom.js"></script>
+  <script src="./vendors/echarts-estate.js"></script>
+
+  <script src="./vendors/datepicker.min.js"></script>
+  <script src="./vendors/datepicker.zh.js"></script>
+  <script src="./vendors/selectize.js"></script>
+  <!-- 本地测试的时候打开 -->
+   <script src="./dist/js/province.js"></script>
+  <script src="./dist/js/citys.js"></script>
+  <script src="./dist/js/const.js"></script>
+  <script src="./dist/js/main.js"></script>
+  <script>
+    function initSide(data) {
+      var $sideList = $('.js-sideList');
+      $sideList.html(data.map(function(item) {
+        return '<li data-type="'+item.id+'">'+item.name+'</li>';
+      }).join(''));
+      $('.js-sideList li:first-child').addClass("active");
+      $('.breadcrumb .section.active').text($('.js-sideList li:first-child').text());
+    }
+    if(!!window.exponents) {
+      initSide(exponents);
+    }
+    if(!!window.months) {
+      $('.js-datepicker-months').val(months[0] + ' ~ ' + months[months.length - 1]);
+    }
+
+    const selectPro = $("#select-province");//省份下拉
+    const selectCity = $('#select-city'); //城市下拉
+    const datapickermonth = $(".js-datepicker-months"); //时间选择器
+    //获取省份数据
+  for(let i =0;i< provinces.length;i++){
+    selectPro.append('<option value="'+provinces[i].id+'">'+provinces[i].name+'</option>');
+  }
+//  $("#select-province[value='406']")
+    selectPro.find("option[value='406']").attr("selected",true);
+    selectPro.on("change",function () {
+        var cityData = '';
+        var selectPOSed = $("#select-province option:selected");
+        var value = selectPOSed.val();
+        for(let k =0;k<citys[value].length;k++){
+          cityData+= '<option value="'+citys[value][k].id+'">'+citys[value][k].name+'</option>';
+        }
+        selectCity.html('<option></option>'+cityData);
+        // 省份不请求
+        // var time = datapickermonth.val().split(" ~ ");
+        // myChartLine(time[0],time[1],selectPro.val(),selectCity.val(),$('.js-sideList li.active').data("type") || 1);
+    });
+    selectCity.on("change",function () {
+      var time = datapickermonth.val().split(" ~ ");
+      myChartLine(time[0],time[1],selectPro.val(),selectCity.val(),$('.js-sideList li.active').data("type") || 1);
+    });
+
+    //时间选择加载
+    datapickermonth.datepicker({
+      view: 'months',
+      minView: 'months',
+      minDate: (window.months && new Date(months[0])) || new Date('2015-01'),
+      maxDate: (window.months && new Date(months[months.length - 1])) || new Date(),
+      language: 'zh',
+      dateFormat: 'yyyy-mm',
+      multipleDates:'2',
+      range:true,
+      multipleDatesSeparator:' ~ ',
+      autoClose: true,
+      onSelect:function(val){
+        const time = val.split(" ~ ");
+        if(time.length==2){
+          const type = $("aside ul li.active").data("type") || 1;
+          myChartLine(time[0],time[1],selectPro.val(),selectCity.val(),type);
+        }
+      }
+    });
+
+
+    //左边tab切换
+    $("aside").on("click", 'ul li', function () {
+      $('aside ul li').removeClass("active");
+      $(this).addClass("active");
+      $('.breadcrumb .section.active').text($(this).text());
+      const type = $(this).data("type");
+      const time = datapickermonth.val().split(" ~ ");
+      myChartLine(time[0],time[1],selectPro.val(),selectCity.val(),type);
+    });
+    const theMonths = datapickermonth.val().split(" ~ ");
+    myChartLine(theMonths[0],theMonths[1],'406','405',1);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+.pannel {
+  margin-bottom: 30px;
+}
+
+.pannel-header {
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px;
+  background: var(--pannel-bg);
+  font-size: 12px;
+  color: #fff;
+}
+
+.pannel-body {
+  padding: 12px;
+  background: var(--box-bg);
+  border-radius: 0 0 6px 6px;
+}

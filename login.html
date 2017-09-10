@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登陆</title>
+  <link rel="stylesheet" href="./dist/fonts/iconfont.css">
+  <link rel="stylesheet" href="./src/css/login.css">
+</head>
+<body>
+    <div class="login-bg">
+      <div class="header">
+        <div class="logoBox">
+          <a href="#">
+            <div class="logo"></div>
+          </a>
+        </div>
+        <div class="loginBox">
+          <div class="login">
+            <a href="#" class="js-showLogin">登录</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="con-left">
+          <h3>宜居中国地产大数据研究院</h3>
+          <h4>YIJU CHINA REAL ESTATE BIG DATA SYSTEM</h4>
+          <p>TrustEstate依托海量移动互联网数据，以宏观至微观的区域经济发展指数以及可视化分析工具，帮助地产从业者打破区域地产信息不对称，准确评估商圈选址价值、产品定位及营销运营策略可行性。宜居中国地产大数据系统是地产行业参与者书桌上的必备工具书。
+
+          </p>
+          <div class="getMore">
+            <a href="#" class="js-showLogin">了解更多</a>
+          </div>
+        </div>
+        <div class="con-right">
+          <div class="cmp-box"></div>
+        </div>
+      </div>
+
+      <div class="land-info content bg2e3">
+        <div class="con-left">
+          <div class="ball-icon ball-icon-cor0"></div>
+          <h3>地产信息高效解析</h3>
+          <div class="line-icon"></div>
+          <p>捕捉市场关键信息，洞察地产市场发展趋势，TrustEstate基于宜居中国大数据研究院专家智库，形成对地产行业专业的信息解读与长期监测报告发布，为地产行业参与者提供权威的一手市场信息与策略研究支持</p>
+        </div>
+        <div class="con-right">
+          <div class="cmp-box-i cmp-box-0"></div>
+        </div>
+      </div>
+
+      <div class="land-info content bgccc2 reverse">
+        <div class="con-left">
+          <div class="cmp-box-i cmp-box-1"></div>
+        </div>
+        <div class="con-right">
+          <div class="ball-icon ball-icon-cor1"></div>
+          <h3>打破地域信息不对称</h3>
+          <div class="line-icon"></div>
+          <p>利用TrustEstate实时发布的最新数据来改善传统宏观经济分析的时效性，为地产行业参与者提供如国民经济发展指数、居民消费指数、固定资产投资指数、婚恋指数、生育指数、失业指数、健康指数、旅游指数、及地产关注指数等关联数据支持与可视化呈现，帮助客户实时了解目标区域经济与社会发展现状与趋势，辅助地产企业制定适合未来市场发展的业务运营策略</p>
+        </div>
+      </div>
+
+      <div class="land-info content bg2e3">
+        <div class="con-left">
+          <div class="ball-icon ball-icon-cor2"></div>
+          <h3>商圈分析触手可及</h3>
+          <div class="line-icon"></div>
+          <p>
+            TrustEstate给行业决策者提供编辑最便捷，灵活的用户体验，通过自定义商圈分析，便能实时掌握目标商圈目前的人群动态、消费行为及用户偏好等人群画像，为客户市场营销及运营提供最及时、精准的数据支持，进一步提升运营效率。
+          </p>
+        </div>
+        <div class="con-right">
+          <div class="cmp-box-i cmp-box-2"></div>
+        </div>
+      </div>
+
+      <div class="land-info content bgccc2 reverse">
+        <div class="con-left">
+          <div class="cmp-box-i cmp-box-3"></div>
+        </div>
+        <div class="con-right">
+          <div class="ball-icon ball-icon-cor3"></div>
+          <h3>借势移动互联，把握前瞻趋势</h3>
+          <div class="line-icon"></div>
+          <p>
+            TrustEstate依托于TrustEstate行业领先的移动大数据挖掘能力，在月活1.5亿用户规模的基础上，将地产行业移动端业务进行实时的数据挖掘与呈现，为客户提供地产移动互联网发展的一手数据资料，动态了解竞品与自身发展，把握前檐趋势。
+          </p>
+        </div>
+
+      </div>
+
+      <footer class="page-footer">
+        <div class="copyright">
+          <span>&copy; 北京麒麟心通网络技术有限公司</span> <span>京ICP备15021456号-4</span>
+        </div>
+      </footer>
+    </div>
+
+    <div id="loginModal" class="modal">
+      <div class="mask"></div>
+      <div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">提示 </h3>
+            <a href="javascript:;" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+            </a>
+          </div>
+          <div class="modal-body">
+            <form class="loginForm" action="#" method="post">
+              <div id="loginError" class="error"></div>
+              <div class="form-group">
+                <!--<label for="usermail" class="control-label sr-only">用户名:</label>-->
+                <div class="wp-input-group">
+                  <span class="wp-input-group-addon user"><i class="iconfont icon-user"></i></span>
+                  <input type="text" class="form-control" name="usermail" id="usermail" placeholder="请输入账号">
+                  <span class="wp-input-group-clear js-input-clear"><i class="iconfont icon-delete"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <!--<label for="username" class="control-label sr-only">密码:</label>-->
+                <div class="wp-input-group">
+                  <span class="wp-input-group-addon lock"><i class="iconfont icon-lock"></i></span>
+                  <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码">
+                  <span class="wp-input-group-clear js-input-clear"><i class="iconfont icon-delete"></i></span>
+                </div>
+              </div>
+              <div class="form-group form-actions">
+                <button type="submit" class="btn btn-block btn-green js-login">登录</button>
+                <!-- <button type="button" class="btn btn-ghost btn-ghost-green js-showRegist">注册</button> -->
+              </div>
+            </form>
+          </div>
+
+          <!-- 申请使用 -->
+          <div class="modal-body-try">
+            <p>添加个人信息</p>
+            <form class="loginForm" action="#" method="post">
+              <div id="loginError" class="error"></div>
+              <div class="form-group">
+                <div class="wp-input-group">
+                  <span class="wp-input-group-addon user"><i class="iconfont icon-email f16"></i></span>
+                  <input type="text" class="form-control" name="email" id="email" placeholder="请输入邮箱">
+                  <span class="wp-input-group-clear js-input-clear"><i class="iconfont icon-delete"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="wp-input-group">
+                  <span class="wp-input-group-addon lock"><i class="iconfont icon-home f27"></i></span>
+                  <input type="text" class="form-control" name="company" id="company" placeholder="您的公司名">
+                  <span class="wp-input-group-clear js-input-clear"><i class="iconfont icon-delete"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="wp-input-group">
+                  <span class="wp-input-group-addon lock"><i class="iconfont icon-user"></i></span>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="您的姓名">
+                  <span class="wp-input-group-clear js-input-clear"><i class="iconfont icon-delete"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="wp-input-group">
+                  <span class="wp-input-group-addon lock"><i class="iconfont icon-weibiaoti1 f21"></i></span>
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="联系电话">
+                  <span class="wp-input-group-clear js-input-clear"><i class="iconfont icon-delete"></i></span>
+                </div>
+              </div>
+              <div class="form-group form-actions">
+                <button type="button" class="btn btn-block btn-green js-try">确认</button>
+              </div>
+            </form>
+          </div>
+          <p id="try">申请试用</p>
+          <p id="backLogin" style="display:none;">返回登录</p>
+        </div>
+      </div>
+    </div>
+
+  <script src="./vendors/jquery.min.js"></script>
+  <script type="text/javascript" src="./dist/js/BigInt.js"></script>
+  <script type="text/javascript" src="./dist/js/Barrett.js"></script>
+  <script type="text/javascript" src="./dist/js/RSA.js"></script>
+  <script>
+    $(function() {
+      $('.js-login').on('click', function (e) {
+        e.preventDefault();
+        var key = getkey();
+        var usermail = $.trim($('#usermail').val()),
+          password = encryptedString(key, $.trim($('#password').val()));
+        if (usermail && password) {
+          $('#loginError').text('');
+          $.ajax({
+            type: 'POST',
+            url: 'login',
+            data: {
+              email: usermail,
+              enpass: password
+            },
+          }).done(function(data){
+            if (data) {
+              if (data.status == 0) {
+                // $('<span style="color: #fff;">' + usermail + ' </span>').insertBefore(
+                //   $(".navLinks .js-showLogin").text('退出').addClass('js-logout').removeClass(
+                //     'js-showLogin'));
+                // $(".actions button").remove();
+                location.href = data.url;
+              } else {
+                $('#loginError').text(data.content);
+              }
+            } else {
+              $('#loginError').text('发生错误。');
+            }
+          }).fail(function (error) {
+            $('#loginError').text('请求发生错误。' + error);
+          })
+        } else {
+          $('#loginError').text('请填写用户名和密码！');
+          return false;
+        }
+      });
+
+
+
+      $('[data-dismiss="modal"]').on('click', function() {
+        $(this).parents('.modal').hide();
+        $('.loginForm')[0].reset();
+      });
+
+
+
+      $('.js-showLogin').on('click', function() {
+        $('#loginModal').show();
+      });
+
+
+
+
+      $('.js-input-clear').on('click', function() {
+        $(this).parent().find('input').val('');
+      });
+
+      $('.loginForm').find('input').on('focus', function() {
+        $(this).parent().find('.js-input-clear').css('display', 'inline-block');
+      }).on('blur', function() {
+        var $this = $(this);
+        setTimeout(function() {
+          $this.parent().find('.js-input-clear').css('display', 'none');
+        }, 100);
+      })
+
+      $("#try").on('click',function(){
+        $("#backLogin").show();
+        $(this).hide();
+        $(".modal-body").css("display","none");
+        $(".modal-body-try").css("display","block");
+      });
+      $("#backLogin").on('click',function(){
+        $(this).hide();
+        $("#try").show();
+        $(".modal-body").css("display","block");
+        $(".modal-body-try").css("display","none");
+      });
+
+      $('.js-try').on('click', function() {
+        var UserEmail = $('#email').val();
+        var Company = $('#company').val();
+        var Name = $('#name').val();
+        var Phone = $('#phone').val();
+        $.ajax({
+          type: 'post',
+          url: 'http://114.215.19.11:20009/index.php/Manage/addcontact',
+          data: {
+            data: JSON.stringify({
+              UserEmail: UserEmail,
+              Company: Company,
+              Name: Name,
+              Phone: Phone
+            })
+          },
+          success: function(data) {
+            if(data && data.code ==0) {
+              alert('提交成功');
+              $('#loginModal').hide();
+            }
+          }
+        })
+      })
+    });
+  </script>
+</body>
+</html>
+

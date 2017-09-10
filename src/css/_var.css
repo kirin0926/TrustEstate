@@ -1,0 +1,14 @@
+:root {
+  --font-family: "Helvetica Neue", Helvetica, "PingFang SC","Hiragino Sans GB",'Microsoft YaHei', 'Segoe UI', 'HelveticaNeue-Light', sans-serif;
+  --body-bg: #2e3442;
+  --base-font-size: 14px;
+  --box-bg: #22222c;
+  --text-color: #79839e;
+  --info-color: #3c82e3;
+  --success-color: #3ad25a;
+  --warning-color: #ff8d65;
+  --border-color: #3c4354;
+  --link-color: #79839e;
+  --link-hover-color: #fff;
+  --pannel-bg: #242630;
+}

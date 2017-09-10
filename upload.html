@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简讯-Trust Estate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./dist/icons/icons.css">
+    <link rel="stylesheet" href="./dist/fonts/iconfont.css">
+    <link rel="stylesheet" href="./dist/css/common.css">
+  <link href="./vendors/datepicker.min.css" rel="stylesheet" type="text/css">
+  <script>
+    var news_total_cnt = 25;
+    var ranking_total_cnt = 25;
+    var report_total_cnt = 14;
+  </script>
+</head>
+<style>
+  .newCheckbox{
+    height: 20px;
+    float: left;
+    width: 20px;
+    margin-right: 20px;
+    margin-top: 25px;
+  }
+  .newsState{
+    color: #f00;
+    font-size: 16px;
+    margin-left: 20px;
+  }
+  .js_slide .title input{
+    background: none;
+    border: none;
+    width: 100%;
+    color: #ffffff;
+  }
+  .s-m-cont textarea{
+    background: none;
+    border: none;
+    width: 100%;
+    color: #ffffff;
+    height: 30px;
+  }
+  .s-m-cont{
+    margin-bottom: 20px;
+  }
+  .s-m-time input{
+    background: none;
+    border: none;
+    color: #ffffff;
+  }
+  /*添加报告弹框*/
+  form{
+    margin: 20px 0;
+    border: 1px solid lightgrey;
+    padding-bottom: 10px;
+  }
+  .submit{
+    margin: 0 auto;
+    display: block;
+    width: 100px;
+    height: 32px;
+  }
+  .modal-content {
+    height: 350px;
+    width: 330px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 13;
+    color: #657180;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 5px #666;
+    padding: 0 20px 20px;
+  }
+  .modal-content h2{
+    text-align: center;
+    color: #000;
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: normal;
+    box-sizing: border-box;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+    background: linear-gradient(to right, #724cf7, #724cf7, #3d81e3, #3d81e3);
+  }
+  .modal-header .close {
+    outline: none;
+    border: none;
+    background: transparent;
+    color: #ccc;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    text-align: right;
+    box-sizing: border-box;
+  }
+  .modal-header .close span {
+    line-height: 1;
+    display: block;
+    font-size: 20px;
+  }
+  td img{
+    width: 50px;
+    height: 50px;
+  }
+  .mod-item-list{
+    margin: 10px 0;
+  }
+  .mod-item-list label{
+    width: 20%;
+    text-align: right;
+    padding-right: 20px;
+    display: inline-block;
+    color: #333;
+    font-size: 14px;
+  }
+  .mod-item-list label span{
+    color: red;
+    margin: 0 5px;
+  }
+  .mod-item-list input{
+    height:20px;
+  }
+  .sliderpic,
+  .slidersource{
+    width:230px;
+  }
+  /*按钮*/
+  #button1,
+  #button2,
+  .delete-news,
+  .release-btn,
+  .update,
+  .add-rank,
+  .delete-rank,
+  .add,
+  .addranking,
+  .js-sliderdele,
+  .release-btn-swiper,
+  .submit,
+  .slider-upload-btn,
+  .add-pic-btn,
+  .cancel{
+    background: #3c82e3;
+    border: none;
+    outline: none;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 80px;
+    height: 32px;
+  }
+  .addranking{
+    margin-left: 50px;
+    width: 100px;
+    margin-top: 20px;
+  }
+  .slider-upload-btn,
+  .cancel{
+    width: 100px;
+    height: 32px;
+    margin-left: 40px;
+  }
+  /*删除按钮*/
+  .delete-news,
+  .js-sliderdele,
+  .delete-rank,
+  .cancel{
+    background:#ff8d65;
+  }
+  /*发布按钮*/
+  .release-btn,
+  .update,
+  .release-btn-swiper{
+    background:#3ad25a;
+  }
+  /*简讯列表、分页*/
+  .newsletter-tit{
+    padding-bottom: 0;
+  }
+  .newlist a{
+    text-decoration: none;
+  }
+  .newlist img{
+    float: left;
+    width: 112px;
+    height: 61px;
+    margin-right: 17px;
+    margin-top: 2px;
+    border: 4px solid #fff;
+    cursor: pointer;
+  }
+  .newlist .newsletter-name{
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-family: 'Microsoft YaHei', sans-serif;
+  }
+  .newlist .newsletter-cont{
+    font-size: 12px;
+    color: #d9d9d9;
+  }
+  .newsTime::before {
+    display: inline-block;
+  }
+  .newsletter-slide{
+    margin-bottom: 20px;
+  }
+  /*修改咨询封面图弹框*/
+  #picModal .modal-content{
+    height: 240px;
+    padding-top: 10px;
+  }
+  .add-pic-btn{
+    margin-left: 50px;
+  }
+  /*排行榜*/
+  .rankingTable td{
+    text-align: center;
+  }
+  .rankingTable td input{
+    background-color: #22222c;
+    border: none;
+    color: #fff;
+    text-align: center;
+  }
+  /*新增排行榜弹框*/
+  #loginModals .modal-content{
+    height: 240px;
+    padding-top: 10px;
+  }
+  #loginModals label{
+    width: 100px;
+  }
+  /*报告*/
+  @media (max-width: 2280px){
+    .slides li {
+      width: 365.1111px;
+    }
+  }
+  .slider-li input{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  .slider-li span{
+    float: right;
+  }
+  .slider-li .s-m-cont{
+    margin-bottom: 0;
+  }
+</style>
+<body class="index-page">
+    <nav class="navbar flex items-center justify-between">
+  <div class="container-fluid">
+    <a href="/" class="brand">
+      <img src="../dist/images/logo.png" class="logo" alt="Trust Estate" height="71" width="261">
+    </a>
+  </div>
+  <ul class="navLinks list-reset flex-auto m0">
+    <li class="inline-block mr1 navLinkItem ">
+      <a href="/" class="navLink " target="_blank">
+        <i class="icon icon-home"></i>
+        <i class="icon icon-home-active active-icon"></i>
+        首页
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem ">
+      <a href="exponent.html" class="navLink ">
+        <i class="icon icon-exponent"></i>
+        <i class="icon icon-exponent-active active-icon"></i>
+        宏观指数
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem ">
+      <a href="tradeanalyst.html" class="navLink ">
+        <i class="icon icon-b-circle"></i>
+        <i class="icon icon-b-circle-active active-icon"></i>
+        商圈分析
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="landestate.html" class="navLink">
+        <i class="icon icon-estate"></i>
+        <i class="icon icon-estate-active active-icon"></i>
+        地产应用
+      </a>
+    </li>
+    <li class="inline-block mr1 navLinkItem">
+      <a href="service.html" class="navLink">
+        <i class="icon icon-service"></i>
+        <i class="icon icon-service-active active-icon"></i>
+        定制服务
+      </a>
+    </li>
+  </ul>
+</nav>
+
+    <div class="page-container">
+      <div class="page-main" style="width: 1200px;">
+        <div class="newsletterbox" style="width:inherit;float: inherit;">
+          <h3 class="newsletter-tit">简讯</h3>
+          <input type="button" name="button" id="button1" value="全选">
+          <input type="button" name="button2" id="button2" value="反选">
+          <button class="delete-news">删除</button>
+          <button class="release-btn">发布</button>
+          <table width="100%" cellspacing="10">
+            <tbody class="newlist">
+            </tbody>
+          </table>
+          <div class="right newsletter-slide ">
+            <ul class="js-pageContainer pageContainer"></ul>
+          </div>
+        </div>
+
+        <div class="ranking" style="float:inherit;width: inherit;">
+          <div class="rankingTableBox active" id="frontRank">
+            <button onclick="$('#loginModals').show()" class="add-rank">新增</button>
+            <button class="delete-rank">删除</button>
+            <button class="update">提交</button>
+            <table class="rankingTable" >
+              <tbody class="frontlist">
+              <!--<tr>-->
+                <!--<td>多选</td>-->
+                <!--<td>名称</td>-->
+                <!--<td>正面反馈</td>-->
+                <!--<td>负面反馈</td>-->
+              <!--</tr>-->
+              </tbody>
+            </table>
+            <div>
+              <div class="right newsletter-slide ">
+                <ul class="js-pageContainerRanking pageContainer"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--轮播图-->
+      <div class="swiper-list" style="position: relative;clear: both;margin: 0px auto;width: 1200px;">
+        <h3 class="newsletter-tit">报告</h3>
+        <p>
+          <button onclick="$('#loginModal').show()" class="add">新增</button>
+          <button class="js-sliderdele">删除</button>
+          <button class="release-btn-swiper">发布</button>
+        </p>
+
+        <ul class="swiperlist slides">
+
+        </ul>
+        <div>
+          <div class="right newsletter-slide ">
+            <ul class="js-pageContainerReport pageContainer"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="userListBox">
+      <div>
+        <table class="usersTable">
+          <thead>
+            <tr>
+              <th>邮箱</th>
+              <th>公司</th>
+              <th>姓名</th>
+              <th>电话</th>
+            </tr>
+          </thead>
+          <tbody class="js-usersTbody">
+          </tbody>
+        </table>
+      </div>
+      <div class="userPaggin">
+        <ul class="js-userPagging pageContainer"></ul>
+      </div>
+    </div>
+
+    <!--简讯修改封面弹框-->
+    <div id="picModal" class="modal" style="display: none">
+      <div class="mask"></div>
+      <div>
+        <!--<form action="http://114.215.19.11:20009/Manage/uploadInfo">-->
+        <div class="modal-content">
+          <h2>修改简讯封面</h2>
+          <form id="picForm" action="http://114.215.19.11:20009/Manage/uploadInfo" enctype="multipart/form-data" method="post"  target="nm_iframe">
+            <div class="mod-item-list">
+              <label>封面</label>
+              <input class="sliderpic" type="file" placeholder="上传" name="photo[]">
+            </div>
+            <input type="submit" value="提交" class="submit">
+          </form>
+          <!--<iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>-->
+
+          <button class="add-pic-btn">确定</button>
+          <button onclick="$('#picModal').hide();" class="cancel">取消</button>
+        </div>
+      </div>
+    </div>
+
+    <!--新增轮播图弹框-->
+    <div id="loginModal" class="modal" style="display: none">
+      <div class="mask"></div>
+      <div>
+        <!--<form action="http://114.215.19.11:20009/Manage/uploadInfo">-->
+
+          <div class="modal-content">
+            <h2>轮播图内容</h2>
+            <div class="mod-item-list">
+              <label><span>*</span>标题</label>
+              <input class="slidertitle" type="text" value="">
+            </div>
+            <div class="mod-item-list">
+              <label><span>*</span>摘要</label>
+              <input class="slidercont" type="text" value="">
+            </div>
+            <div class="mod-item-list">
+              <label><span>*</span>作者</label>
+              <input class="sliderauther" type="text" value="">
+            </div>
+            <form id="myForm" action="http://114.215.19.11:20009/Manage/uploadInfo" enctype="multipart/form-data" method="post"  target="nm_iframe">
+              <div class="mod-item-list">
+                <label><span>*</span>封面</label>
+                <input class="sliderpic" type="file" placeholder="上传" name="photo[]">
+              </div>
+              <div class="mod-item-list">
+                <label><span>*</span>资源</label>
+                <input class="slidersource" type="file" placeholder="上传" name="photo[]">
+              </div>
+              <input type="submit" value="提交" class="submit">
+            </form>
+            <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+
+            <button class="slider-upload-btn">确定</button>
+            <button onclick="$('#loginModal').hide();" class="cancel">取消</button>
+          </div>
+
+        <!--</form>-->
+      </div>
+    </div>
+
+    <!--新增排行榜弹框-->
+    <div id="loginModals" class="modal" style="display: none">
+      <div class="mask"></div>
+      <div>
+        <div class="modal-content">
+          <h2>新增排行榜</h2>
+          <div class="mod-item-list">
+            <label>名称</label>
+            <input class="ranktitle" type="text">
+          </div>
+          <div class="mod-item-list">
+            <label>正面反馈值</label>
+            <input class="rankzhengval" type="text">
+          </div>
+          <div class="mod-item-list">
+            <label>负面反馈值</label>
+            <input class="rankfuval" type="text">
+          </div>
+          <button class="addranking">确定</button>
+          <button onclick="$('#loginModals').hide();" class="cancel">取消</button>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="loadingModal" id="laodingModal"><div class="loadingMask"></div>\-->
+      <!--<div class="loadingModalContent"><div class="loadingElement"></div></div></div>-->
+<!-- <script>var news_total_cnt = <?php echo json_encode($news_total_cnt); ?>;</script>
+  <script>var report_total_cnt = <?php echo json_encode($report_total_cnt); ?>;</script> -->
+    <script src="./vendors/jquery.min.js"></script>
+    <script src="./vendors/datepicker.min.js"></script>
+    <script src="./vendors/datepicker.zh.js"></script>
+    <script src="./dist/js/const.js"></script>
+    <script src="./dist/js/main.js"></script>
+    <script src="//oss.maxcdn.com/jquery.form/3.50/jquery.form.min.js"></script>
+
+    <script>
+
+      $(document).ready(function() {
+
+        var fixurl = 'http://114.215.19.11:20008/index.php';
+
+      $('.js-rankingTabMenus').on('click', '.js-rankingTab', function(e) {
+        e.preventDefault();
+        var targetId = $(this).attr('href');
+        $(this).addClass('active').siblings().removeClass('active');
+        $(targetId).addClass('active').siblings().removeClass('active');
+      });
+      //图片上传预览    IE是用了滤镜。
+      function previewImage(file) {
+        var MAXWIDTH  = 90;
+        var MAXHEIGHT = 90;
+        var div = document.getElementById('preview');
+        if (file.files && file.files[0])
+        {
+          div.innerHTML ='<img id=imghead onclick=$("#previewImg").click()>';
+          var img = document.getElementById('imghead');
+          img.onload = function(){
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            img.width  =  rect.width;
+            img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+            img.style.marginTop = rect.top+'px';
+          }
+          var reader = new FileReader();
+          reader.onload = function(evt){img.src = evt.target.result;};
+          reader.readAsDataURL(file.files[0]);
+        }
+        else //兼容IE
+        {
+          var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+          file.select();
+          var src = document.selection.createRange().text;
+          div.innerHTML = '<img id=imghead>';
+          var img = document.getElementById('imghead');
+          img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+          var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+          status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+          div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+        }
+      }
+      function clacImgZoomParam(maxWidth, maxHeight, width, height){
+        var param = {top:0, left:0, width:width, height:height};
+        if( width>maxWidth || height>maxHeight ){
+          rateWidth = width / maxWidth;
+          rateHeight = height / maxHeight;
+
+          if( rateWidth > rateHeight ){
+            param.width =  maxWidth;
+            param.height = Math.round(height / rateWidth);
+          }else{
+            param.width = Math.round(width / rateHeight);
+            param.height = maxHeight;
+          }
+        }
+        param.left = Math.round((maxWidth - param.width) / 2);
+        param.top = Math.round((maxHeight - param.height) / 2);
+        return param;
+      }
+
+        $("#button1").click(function(){
+
+          $(".newlist tr td input:checkbox").attr("checked",true);   //设置所有复选框默认勾选
+
+        });
+
+        $("#button2").click(function(){
+
+          $(".newlist tr td input:checkbox").attr("checked",false);   //设置所有复选框未勾选
+
+        });
+
+
+        /*修改简讯封面图*/
+        let icon = '';
+        $('#picForm').ajaxForm(function(data) {
+          if(data.data&&data.data.length>0){
+            for(let i=0;i<data.data.length;i++){
+              icon = data.data[i][1];
+            }
+            alert( "添加封面成功" );
+          }
+        });
+
+        $('.add-pic-btn').on('click',function () {
+            if(!icon&&icon.length<=0){
+              alert('请先上传封面图');
+              return;
+            }
+          let news = new Array();
+          news.push({
+            'id': $('#picModal').attr('data-id'),
+            'icon': icon,
+            'status': '0'
+          });
+          $.ajax({
+            type: "post",
+            // async: false,
+            url: fixurl+"/Manage/editInfo",
+            dataType: "json",
+            data:{
+              data: window.JSON.stringify({
+                // ‘0’：新增
+                // ‘1’：发布
+                // ‘2’：删除
+                "news": news
+              })
+            },
+            success:function(data) {
+              alert("修改封面图成功");
+              window.location.reload();
+            },
+            error:function(){
+              alert("接口请求失败")
+            }
+          });
+        });
+
+        /*
+          删除简讯
+        */
+
+        $(".delete-news").click(function(){
+
+          $(".newlist tr td input:checked").parent().parent().fadeOut("show"); //隐藏所有被选中的input元素
+
+          const checkedlist = $(".newlist tr td input:checked");
+
+          let newslist = new Array(); //简讯数据组
+
+          for (let i=0;i<checkedlist.length;i++){
+
+            newslist.push({
+
+              'id':checkedlist[i].value,
+
+              'status':'2'
+
+            })
+
+          }
+
+          $.ajax({
+
+            type: "post",
+
+            // async: false,
+
+            url: fixurl+"/Manage/editInfo",
+
+            dataType: "json",
+
+            data:{
+
+              data: window.JSON.stringify({
+
+                // ‘0’：新增
+
+                // ‘1’：发布
+
+                // ‘2’：删除
+
+                "news":newslist
+
+              })
+            },
+            success:function(data) {
+
+              alert("删除简讯成功");
+              window.location.reload();
+            },
+
+            error:function(){
+
+              alert("接口请求失败")
+
+            }
+
+          });
+
+        });
+
+        /*
+          发布简讯
+         */
+
+        $(".release-btn").on('click',function () {
+          $(".newlist tr td input:checked").parent().parent().fadeOut("show"); //隐藏所有被选中的input元素
+
+          const checkedlist = $(".newlist tr td input:checked");
+
+          let newslist = new Array(); //简讯数据组
+
+          for (let i=0;i<checkedlist.length;i++){
+
+            newslist.push({
+
+              'id':checkedlist[i].value,
+
+              'status':'1'
+
+            })
+
+          }
+
+          $.ajax({
+
+            type: "post",
+
+            // async: false,
+
+            url: fixurl+"/Manage/editInfo",
+
+            dataType: "json",
+
+            data:{
+
+              data: window.JSON.stringify({
+
+                // ‘0’：新增
+
+                // ‘1’：发布
+
+                // ‘2’：删除
+
+                "news":newslist
+
+              })
+            },
+            success:function(data) {
+
+              alert("发布简讯成功");
+              window.location.reload();
+
+            },
+
+            error:function(){
+
+              alert("接口请求失败")
+
+            }
+
+          });
+
+        });
+
+
+        /*
+          新增排行榜
+         */
+        $('.addranking').on('click',function () {
+          let ranklist = new Array();
+          ranklist.push({
+              'keyword':$('.ranktitle').val(),
+              'positive':$('.rankzhengval').val(),
+              'negative':$('.rankfuval').val(),
+              'type': 1
+          });
+          $.ajax({
+            type: "post",
+            // async: false,
+            url: fixurl+"/Manage/editInfo",
+            dataType: "json",
+            data:{
+              data: window.JSON.stringify({
+                // ‘0’：新增
+                // ‘1’：发布
+                // ‘2’：删除
+                "ranking": ranklist
+              })
+            },
+            success:function(data) {
+              alert("添加舆情成功");
+              window.location.reload();
+            },
+            error:function(){
+              alert("接口请求失败")
+            }
+          });
+        });
+
+//        提交排行榜数据
+
+        $('.update').on('click',function () {
+
+          let ranklist = new Array();
+
+          let tr = $(".frontlist tr.item");
+
+          for(let i=0;i<tr.length;i++){
+              let td = tr.eq(i).find("td");
+
+              let item = {};
+              item = {
+                'keyword':td.eq(1).find("input").val(),
+
+                'positive':td.eq(2).find("input").val(),
+
+                'negative':td.eq(3).find("input").val()
+
+              }
+
+              ranklist.push(item);
+          }
+
+          $.ajax({
+
+            type: "post",
+
+            // async: false,
+
+            url: fixurl+"/Manage/editInfo",
+
+            dataType: "json",
+
+            data:{
+
+              data: window.JSON.stringify({
+
+                // ‘0’：新增
+
+                // ‘1’：发布
+
+                // ‘2’：删除
+
+                "ranking": ranklist
+
+              })
+
+            },
+
+            success:function(data) {
+
+              alert("更新舆情成功");
+              window.location.reload();
+
+            },
+
+            error:function(){
+
+              alert("接口请求失败")
+
+            }
+
+          });
+
+        });
+
+        //        删除排行榜数据
+
+        $('.delete-rank').on('click',function () {
+
+          let ranklist = new Array();
+
+          let tr = $(".frontlist tr.item");
+
+          for(let i=0;i<tr.length;i++){
+            if(tr.eq(i).find('input:checkbox').attr("checked")=="checked"){
+              let input = tr.eq(i).find("input");
+
+              let item = {};
+              item = {
+                'keyword':input.eq(1).val(),
+
+                'positive':input.eq(2).val(),
+
+                'negative':input.eq(3).val(),
+
+                'type':'0'
+
+              }
+
+              ranklist.push(item);
+            }
+          }
+
+          $.ajax({
+
+            type: "post",
+
+            // async: false,
+
+            url: fixurl+"/Manage/editInfo",
+
+            dataType: "json",
+
+            data:{
+
+              data: window.JSON.stringify({
+
+                // ‘0’：新增
+
+                // ‘1’：发布
+
+                // ‘2’：删除
+
+                "ranking": ranklist
+
+              })
+
+            },
+
+            success:function(data) {
+
+              alert("删除舆情成功");
+              window.location.reload();
+
+            },
+
+            error:function(){
+
+              alert("接口请求失败")
+
+            }
+
+          });
+
+        });
+
+
+
+        /*
+          删除报告
+         */
+
+        $('.js-sliderdele').on('click', function() {
+          if (confirm("确定删除吗？")) {
+            let reportlist = new Array();  //分析报告
+
+//          $(".swiperlist li input:checked").parent().parent().fadeOut("show"); //隐藏所有被选中的input元素
+
+            const swiperchecked = $(".swiperlist li input:checked");
+
+            for(let i =0;i<swiperchecked.length;i++){
+
+              reportlist.push({
+
+                'id':swiperchecked[i].value,
+
+                'status':2
+
+              })
+
+            }
+
+            $.ajax({
+
+              type: "post",
+
+              // async: false,
+
+              url: fixurl+"/Manage/editInfo",
+
+              dataType: "json",
+
+              data:{
+
+                data: window.JSON.stringify({
+
+                  // ‘0’：新增
+
+                  // ‘1’：发布
+
+                  // ‘2’：删除
+
+                  "report":reportlist
+
+                })
+              },
+              success:function(data) {
+                alert("删除报告成功");
+                window.location.reload();
+              },
+
+              error:function(){
+
+                alert("接口请求失败")
+
+              }
+
+            });
+          }
+          else {
+//            alert("您取消了删除");
+          }
+        });
+
+        /*
+          添加报告
+         */
+        let picdata = new Array();
+
+        $('#myForm').ajaxForm(function(data) {
+          if(data.data&&data.data.length>0){
+            for(let i=0;i<data.data.length;i++){
+              picdata.push(data.data[i][1]);
+            }
+            alert( "添加封面成功" );
+          }
+        });
+
+        $('.slider-upload-btn').on('click',function () {
+            if (!picdata[0]||!picdata[1]){
+                alert('请先上传封面图和资源文件');
+                return;
+            }
+
+          let reportlistadd = new Array();
+
+          reportlistadd.push({
+
+            'title':$('.slidertitle').val(),
+
+            'brief':$('.slidercont').val(),
+
+            'author':$('.sliderauther').val(),
+
+            'icon':picdata[0],
+
+            'resource':picdata[1],
+
+            'status':'0'
+
+          });
+
+          $.ajax({
+
+            type: "post",
+
+            // async: false,
+
+            url: fixurl+"/Manage/editInfo",
+
+            dataType: "json",
+
+            data:{
+
+              data: window.JSON.stringify({
+
+                // ‘0’：新增
+
+                // ‘1’：发布
+
+                // ‘2’：删除
+
+                "report":reportlistadd
+
+              })
+
+            },
+            success:function(data) {
+
+              alert("添加报告成功");
+              window.location.reload();
+
+            },
+
+            error:function(){
+
+              alert("接口请求失败")
+
+            }
+
+          });
+
+        });
+
+        /*
+          发布报告
+         */
+
+        $(".release-btn-swiper").on('click',function () {
+
+          $(".swiperlist li input:checked").parent().parent().fadeOut("show"); //隐藏所有被选中的input元素
+
+          const checkedlist = $(".swiperlist li input:checked");
+
+          let reportlist = new Array(); //简讯数据组
+
+          for (let i=0;i<checkedlist.length;i++){
+
+            reportlist.push({
+
+              'id':checkedlist[i].value,
+
+              'status':'1'
+
+            })
+
+          }
+
+          $.ajax({
+
+            type: "post",
+
+            // async: false,
+
+            url: fixurl+"/Manage/editInfo",
+
+            dataType: "json",
+
+            data:{
+
+              data: window.JSON.stringify({
+
+                // ‘0’：新增
+
+                // ‘1’：发布
+
+                // ‘2’：删除
+
+                "report":reportlist
+
+              })
+            },
+            success:function(data) {
+
+              alert("发布简讯成功");
+
+              window.location.reload();
+
+            },
+
+            error:function(){
+
+              alert("接口请求失败");
+
+            }
+
+          });
+
+        });
+
+//       舆情分页
+        function initRanking(page){
+          $.ajax({
+            type: "get",
+            // async: false,
+            url: fixurl+"/Manage/editInfo",
+            dataType: "json",
+            data:{
+              data: window.JSON.stringify({
+                'ranking':{
+                  'offset':(page-1) * 10,
+                  'rows':10
+                }
+              })
+            },
+            success: function(data){
+
+//            排行榜
+              initPaging($('.js-pageContainerRanking')[0], Math.ceil((ranking_total_cnt || json.news.length)/10), page);
+
+              let trpositive = '<tr><td>多选</td><td>名称</td><td>正面反馈</td><td>负面反馈</td></tr>';
+              for(let i=0;i<data.ranking.length;i++){
+
+                const numb = i+1;
+
+                trpositive += `<tr class="item">
+
+                          <td><input name="ranking" type="checkbox" value=""></td>
+
+                          <td><input class="keyword" type="text" value="`+data.ranking[i].keyword+`"></td>
+
+                          <td><input class="positive" type="text" value="`+data.ranking[i].positive+`"></td>
+
+                          <td><input class="negative" type="text" value="`+data.ranking[i].negative+`"></td>
+
+                        </tr>`;
+
+              }
+              $('.frontlist').html(trpositive);
+
+              $('table tr td:nth-child(1)').click(function () {
+
+                $(this).find('input:checkbox').attr("checked",true);
+
+              });
+
+            },
+            error:function(){
+
+              alert("接口请求失败")
+
+            }
+          });
+        }
+        initRanking(1);
+
+
+//        简讯分页
+        function initNews(page) {
+          $.ajax({
+            type: "get",
+            // async: false,
+            url: fixurl+"/Manage/editInfo",
+            dataType: "json",
+            data:{
+              data: window.JSON.stringify({
+                "news":{
+                  'offset':(page-1) * 10,
+                  'rows':10
+                }
+              })
+            },
+            success: function(data){
+//            简讯
+              initPaging($('.js-pageContainer')[0], Math.ceil((news_total_cnt || json.news.length)/10), page);
+              let tr ='';
+              tr += '<tr><td>多选</td><td>内容简介</td><td>状态</td></tr>';
+              for(let i=0;i<data.news.length;i++){
+                if(data.news[i].status==0){
+                  var sta = '新增';
+                }else if(data.news[i].status==1){
+                  var sta = '发布'
+                }else if(data.news[i].status==2){
+                  var sta = '删除'
+                }
+                tr += `<tr>
+                    <td><input name="Fruit" type="checkbox" value="`+data.news[i].id+`"></td>
+                    <td>
+                        <div>
+                          <img class="pic" data-id="`+data.news[i].id+`" src="`+fixurl+data.news[i].icon+`" alt="">
+                          <a href="`+data.news[i].resource+ `" target="_Blank">
+                            <div class="overflow-hidden">
+                              <div class="newsletter-name">
+                                <span class="newsSource right">
+                                  <span>`+data.news[i].author+`</span>
+                                  <span class="newsTime">`+data.news[i].time+`</span>
+                                </span>
+                                `+data.news[i].title+`
+                              </div>
+                              <div class="newsletter-cont">`+data.news[i].title+`</div>
+                            </div>
+                          </a>
+                        </div>
+                    </td>
+                    <td>`+sta+`</td>
+                  </tr>`;
+              }
+              $('.newlist').html(tr);
+              $(".pic").bind('click',function(){
+                $('#picModal').attr('data-id',$(this).attr('data-id')).show();
+              });
+            },
+            error:function(){
+              alert("接口请求失败")
+            }
+          });
+        }
+        initNews(1);
+
+        function initReport(page) {
+          $.ajax({
+            type: "get",
+            // async: false,
+            url: fixurl+"/Manage/editInfo",
+            dataType: "json",
+            data:{
+              data: window.JSON.stringify({
+                "report":{
+                  'offset':(page-1) * 9,
+                  'rows':9
+                }
+              })
+            },
+            success: function(data){
+//            轮播图
+
+              initPaging($('.js-pageContainerReport')[0], Math.ceil((report_total_cnt || data.news.length)/9), page);
+
+              let slider = '';
+
+              for(let i=0;i<data.report.length;i++){
+
+                if(data.report[i].status==0){
+
+                  var stas = '新增';
+
+                }else if(data.report[i].status==1){
+
+                  var stas = '发布';
+
+                }else if(data.report[i].status==2){
+
+                  var stas = '删除';
+
+                }
+                slider += `<li>
+                              <div class="slider-li">
+                                <div class="title"><input name="Fruit" type="checkbox" value="`+data.report[i].id+`">`+data.report[i].title+`<span>`+stas+`</span></div>
+                                <div class="slider-li-main">
+                                  <div class="img"><img src="`+fixurl+data.report[i].icon+`" alt=""></div>
+                                  <div class="overflow-hidden">
+                                    <h3>报告摘要：</h3>
+                                    <div class="s-m-cont">`+data.report[i].brief+`</div>
+                                    <div class="s-m-time">`+data.report[i].time+`</div>
+                                    <div class="s-m-db"><a href="`+imgurl+data.report[i].resource+`" target="_Blank" class="downloadBtn">下载</a></div>
+                                  </div>
+                                </div>
+                              </div>
+                          </li>`;
+              }
+              $('.swiperlist').html(slider);
+            },
+            error:function(){
+              alert("接口请求失败")
+            }
+          });
+        }
+        initReport(1);
+
+        $('.js-pageContainer').on('click', '[data-page]',function(){
+          if(!$(this).hasClass('disabled') && !$(this).hasClass('active')) {
+            var page = $(this).attr('data-page');
+            initNews(page);
+          }
+        });
+        $('.js-pageContainerReport').on('click', '[data-page]',function(){
+          if(!$(this).hasClass('disabled') && !$(this).hasClass('active')) {
+            var page = $(this).attr('data-page');
+            initReport(page);
+          }
+        });
+        $('.js-pageContainerRanking').on('click', '[data-page]',function(){
+          if(!$(this).hasClass('disabled') && !$(this).hasClass('active')) {
+            var page = $(this).attr('data-page');
+            initRanking(page);
+          }
+        });
+
+        function initUsers(page) {
+          $.ajax({
+            type: "post",
+            // async: false,
+            url: fixurl+"/Manage/contact",
+            dataType: "json",
+            data:{
+              data: window.JSON.stringify({
+                'offset': (page-1) * 10 || 0,
+                'size': 10
+              })
+            },
+            success: function(data){
+              if(data && data.code ==0 && data.infos) {
+                initPaging($('.js-userPagging')[0], Math.ceil(data.total/10), page);
+                var users = data.infos.map(function(item) {
+                  return '<tr>'+
+                    '<td>'+item.UserEmail+'</td>'+
+                    '<td>'+item.Company+'</td>'+
+                    '<td>'+item.Name+'</td>'+
+                    '<td>'+item.Phone+'</td>'+
+                    '</tr>';
+                }).join('');
+                $('.js-usersTbody').html(users);
+              }
+            },
+            error:function(){
+              alert("接口请求失败")
+            }
+          });
+        }
+        initUsers(1);
+        $('.js-userPagging').on('click', '[data-page]',function(){
+          if(!$(this).hasClass('disabled') && !$(this).hasClass('active')) {
+            var page = $(this).attr('data-page');
+            initUsers(page);
+          }
+        });
+
+      });
+
+    </script>
+</body>
+</html>

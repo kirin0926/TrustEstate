@@ -1,0 +1,464 @@
+.personal-content {
+  display: none;
+}
+.datepicker-box {
+  position: relative;
+  padding-right: 15px;
+}
+.datepicker-box::after {
+  content: '';
+  display: table;
+  border-left: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(-45deg);
+  height: 6px;
+  width: 6px;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+.datepicker-box .datepicker-months {
+  margin-left: 5px;
+}
+
+.breadselect .datepicker-months {
+  width: 5.5em;
+  color: #fff;
+  outline: 0;
+}
+
+.sexChart {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.pieChart {
+  height: 400px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.p-sex-nums {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  line-height: 2;
+  margin: 24px 0 18px;
+}
+
+.p-sex-nums .iconfont {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.sex-male {
+  width: 50%;
+  color: #63a4ff;
+  text-align: center;
+}
+
+.sex-female {
+  width: 50%;
+  color: #ff8d65;
+  text-align: center;
+}
+
+.p-chart {
+  height: 360px;
+  width: 100%;
+}
+
+.GCchart {
+  height: 400px;
+  display: inline-block;
+  vertical-align: top;
+  width: 62%;
+  margin-right: -0.4em;
+}
+
+.chartDataBox {
+  width: 38%;
+  /*margin-left: 1%;*/
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 0 0 16px;
+  font-size: 12px;
+}
+
+.gtable {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.gtable table {
+  width: 100%;
+  /*border: 1px solid red;*/
+  text-align: center;
+}
+
+.gtable table tr {
+  height: 46px;
+  /*line-height: 35px;*/
+}
+
+.newandroidModelHead {
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 12px;
+  overflow: hidden;
+  width: calc(100% - 12px);
+  z-index: 3;
+  padding-right: 10px;
+}
+
+.newandroidModelHead tr {
+  background: #22222c;
+  font-weight: normal;
+  color: #79839e;
+  font-size: 12px;
+}
+
+.newandroidModelHead tbody tr {
+  font-size: 12px;
+}
+
+.newandroidModelHead tr th {
+  font-size: 12px;
+  text-align: left;
+}
+
+.newandroidModelHead tr th:first-child {
+  text-align: left;
+  padding-left: 8px;
+}
+
+
+.newandroidModelHead th:first-child,
+.newandroidModelHead td:first-child,
+.newandroidModelList td:first-child,
+.newandroidModelList th:first-child {
+  text-align: left;
+}
+
+.newandroidModelList {
+  width: 100%;
+  height: 312px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  margin-top: 48px;
+}
+
+.newandroidModelList i {
+  font-style: normal;
+}
+
+.newandroidModelList thead tr {
+  line-height: 0;
+  height: auto;
+}
+.newandroidModelList th {
+  visibility: hidden;
+}
+
+.newandroidModelList td {
+  font-size: 12px;
+  text-align: left;
+}
+
+.newandroidModelList tbody tr:first-child td,
+.newandroidModelList tbody tr:first-child td a {
+  color: #ff8d65;
+}
+
+.newandroidModelList tbody tr:nth-child(2) td,
+.newandroidModelList tbody tr:nth-child(2) td a {
+  color: #dcca2f;
+}
+
+.newandroidModelList tbody tr:nth-child(3) td,
+.newandroidModelList tbody tr:nth-child(3) td a {
+  color: #3ad25a;
+}
+
+.phonebrandlist {
+  height: 382px;
+}
+
+.p-trangleBox {
+  position: relative;
+  height: 400px;
+  /*padding-right: 20px;*/
+}
+
+.p-trangleBox1,
+.p-trangleBox2,
+.p-trangleBox3 {
+  position: absolute;
+  bottom: 0;
+}
+
+.p-trangleBoxContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  padding-bottom: 15px;
+  line-height: 1.35;
+}
+
+.p-trangleBoxContent i {
+  font-size: inherit;
+  line-height: 1;
+}
+
+.p-trangleBox1 {
+  background: url('../images/tr1.png') no-repeat center bottom;
+  background-size: contain;
+  width: 303px;
+  height: 294px;
+  /*width: 379px;
+  height: 368px;*/
+  left: 50%;
+  -webkit-transform: translate(-45%, 0);
+          transform: translate(-45%, 0);
+  z-index: 3;
+  font-size: 38px;
+  color: #ff8d65;
+}
+.p-trangleBox2 {
+  background: url('../images/tr2.png') no-repeat center bottom;
+  background-size: contain;
+  width: 271px;
+  height: 237px;
+  /*width: 339px;
+  height: 297px;*/
+  left: 0;
+  font-size: 28px;
+  color: #00cc99;
+}
+.p-trangleBox3 {
+  background: url('../images/tr3.png') no-repeat center bottom;
+  background-size: contain;
+  width: 191px;
+  height: 173px;
+  /*width: 239px;
+  height: 217px;*/
+  right: 20px;
+  font-size: 24px;
+  color: #ffaa3d;
+}
+
+.p-trangleBox1 i {
+  font-size: 72px;
+}
+
+.p-trangleBox2 i {
+  font-size: 50px;
+}
+
+.p-trangleBox3 i {
+  font-size: 45px;
+}
+
+.p-trangleBox1 .name {
+  font-size: 22px;
+}
+
+.p-trangleBox2 .name {
+  font-size: 20px;
+}
+
+.p-trangleBox3 .name {
+  font-size: 18px;
+}
+
+.p-customLegend {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 130px;
+}
+
+
+.p-customLegend li {
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+.p-customLegend li i {
+  font-size: 2.8em;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.interestChartBox {
+  overflow: auto;
+}
+
+.similarAppsList {
+  position: relative;
+  padding-top: 1px;
+}
+
+.p-table-top-head {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+  overflow: hidden;
+  height: 45px;
+  max-height: 45px;
+}
+
+.p-table-bottom-body {
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 43px;
+}
+.p-table-bottom-body .p-table thead th{
+  line-height: 0;
+  visibility: hidden;
+  padding: 0;
+}
+.p-table-bottom-body .p-table thead th * {
+  padding: 0;
+  margin: 0;
+}
+.p-table thead th[onclick] {
+  cursor: pointer;
+}
+
+.p-panel .p-panel-head-title {
+  border-right: 0;
+}
+
+.p-dataTableAppName {
+  /*white-space:nowrap;
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+  overflow: hidden;
+  max-width: 6em;*/
+  display: inline-block;
+  vertical-align: middle;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+.p-table {
+  width: 100%;
+}
+
+.p-table thead th,
+.p-table tbody td {
+  padding: 10px;
+  text-align: left;
+}
+
+.p-table thead th {
+  border-bottom: 1px solid #3c4354;
+}
+
+.p-table-item {
+  color: #fff;
+  text-align: left;
+}
+
+.p-table-item td {
+  border-bottom: 1px solid #3c4354;
+}
+
+.p-table-item td a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.p-table-item td a:hover {
+  text-decoration: underline;
+}
+
+.p-table-item .left {
+  padding: 0 20px;
+  text-align: left;
+  position: relative;
+}
+
+.p-table-item .left span{
+ display: inline-block;
+  margin-right: 5px;
+}
+
+.p-table-item .left .newspan {
+  max-width: 190px;
+  vertical-align: middle;
+}
+
+.p-table-item .right {
+  float: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px 0 0;
+}
+
+.p-table-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.p-process {
+  width: 135px;
+  background: transparent;
+  height: 6px;
+  margin: 0 10px;
+}
+
+.p-process-bar {
+  background: linear-gradient(to right, #6151df, #367ccf);
+  height: inherit;
+  border-radius: 6px;
+}
+
+.p-list-item .p-process {
+  height: 10px;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.resetTradeSelectBtn {
+  text-decoration: none;
+  margin-top: -2px;
+}

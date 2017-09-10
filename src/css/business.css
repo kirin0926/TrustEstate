@@ -1,0 +1,66 @@
+main section {
+  padding: 12px 0;
+  padding-bottom: 0;
+}
+.area-map {
+  box-sizing: border-box;
+  position: relative;
+}
+.area-title {
+  padding: 0px 0 12px 20px;
+  color: #fff;
+}
+.map-main {
+  height: 560px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.select-option {
+  position: absolute;
+  top: 32px;
+  left: 23px;
+  line-height: 0;
+  z-index: 33;
+}
+.BMapLib_Drawing.BMap_noprint.anchorTR {
+  margin-top: 26px;
+}
+.BMapLib_box.BMapLib_marker {
+  display: none;
+}
+.BMapLib_box.BMapLib_polyline {
+  display: none;
+}
+.map-foot {
+  position: relative;
+  background: #22222c;
+  z-index: 33;
+  height: 96px;
+  /* padding-top: 10px; */
+  margin-top: -50px;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.button {
+  height: 32px;
+  width: 210px;
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+  color: #fff;
+  background: linear-gradient(to right, #6757f3, #3886e1);
+  border-radius: 6px;
+  font-size: 12px;
+  margin-top: 10px;
+  font-weight: normal;
+}
+.button[disabled] {
+  background: rgba(128,128,128, 0.5);
+}

@@ -1,0 +1,143 @@
+
+.slider {
+    max-width: 1440px;
+    width: 90%;
+    margin: 0 auto 30px
+}
+.frame {
+    /**
+                 * (optional) wrapper width, specifies width of the slider frame.
+                 */
+    /*width: 880px;*/
+    position: relative;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.slides {
+    display: inline-block;
+    padding: 0;
+}
+
+.slides li {
+    position: relative;
+    display: inline-block;
+    width: 400px;
+    margin-right: 20px;
+    line-height: 1;
+    font-size: 16px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #22222c;
+}
+
+.slides li:last-child {
+    margin-right: 0;
+}
+
+@media (max-width: 1280px) {
+    .slides li {
+        width: 365.1111px;
+    }
+}
+
+.slider-li {
+  box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+}
+
+.slider-li .title{
+    padding: 15px;
+    color: #fff;
+    border-bottom: 1px solid #3c4354;
+    font-size: 12px;
+}
+.slider-li-main{
+    padding: 15px;
+    overflow: hidden;
+}
+.slider-li-main .img{
+    float: left;
+    margin-right: 24px;
+    /* margin-top: 24px; */
+    width: 108px;
+     height: 124px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.slider-li-main .img img {
+  max-height: 100%;
+  max-width: 100%;
+}
+.slider-li-main .overflow-hidden h3{
+    margin: 0;
+    color: #79839e;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+}
+.s-m-cont{
+    color: #79839e;
+    font-size: 12px;
+    height: 38px;
+    /*line-height: 40px;*/
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.s-m-time{
+    color: #79839e;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+}
+.s-m-db .downloadBtn{
+    display: inline-block;
+    background: linear-gradient(to right, #6856f3, #3886e1);
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    width: 91px;
+    height: 32px;
+    border-radius: 8px;
+    outline: none;cursor: pointer;
+    text-align: center;
+    line-height: 32px;
+    text-decoration: none;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    display: block;
+    cursor: pointer;
+}
+.prev img, .next img{
+    width: 26px;
+}
+.next {
+    right: 20px;
+    margin-top: 0;
+}
+
+.prev {
+    left: 20px;
+    margin-top: 0;
+}
+
+.next svg,
+.prev svg {
+    width: 25px;
+}
+
+.report-text {
+    float: left;
+}
